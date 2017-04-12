@@ -1,10 +1,10 @@
 var express = require('express')
 var app = express()
+var port = process.env.PORT || 80
+var morgan = require('morgan')
 
-app.get('/',function(req,res){
-	res.send('Unidad de gestion deployment probando pull')
-})
+app.use(morgan('dev'))
 
-app.listen(process.env.PORT || 80, function(){
-	console.log('Running the server')
+app.listen(port, function(){
+	console.log('Running the server on port' + port)
 })
