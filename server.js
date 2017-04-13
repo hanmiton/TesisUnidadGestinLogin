@@ -12,7 +12,9 @@ app.use(morgan('dev'));
 
 //Deploy
 //mongoose.connect('mongodb://localhost :27017/tutorial', function(err){
-mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
+//mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
+mongoose.connect('mongodb://node:node@ds023644.mlab.com:23644/hanmilton',function(err){
+
 	if(err){
 		console.log('Not Connected to the database: ' + err);
 	}
