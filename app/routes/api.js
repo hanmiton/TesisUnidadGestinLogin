@@ -1,11 +1,11 @@
 var User = require('../models/user');
 
 module.exports = function(router){
-	// http://localhost:8000/users
+	// http://localhost:80/api/users
 	// www.unidaddegestion.club:80/users
 	router.post('/users',function(req,res){
 		//res.send('testing users route')
-		console.log(req.body);
+		//console.log(req.body);
 		var user = new User();
 		user.username = req.body.username;
 		user.password = req.body.password;
