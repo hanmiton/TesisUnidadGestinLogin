@@ -1,18 +1,26 @@
 angular.module('mainController',['authServices'])
 
-.controller('mainCtrl', function(Auth, $location, $timeout){
+.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope){
 	//console.log('hanmilton')
 	var app = this;
 
-	if (Auth.isLoggedIn()) {
+	$rootScope.$on('$routeChangeStart', function() {
+		if (Auth.isLoggedIn()) {
 		console.log('Success: User is logged in.');
 		Auth.getUser().then(function(data) {
 			console.log(data.data.username);
+			console.log(data.data);
 			app.username = data.data.username;
+			app.useremail = data.data.email;
 		})
-	}else {
-		console.log('Failure: User is NOT logged in.');
-	}
+		}else {
+			console.log('Failure: User is NOT logged in.');
+			app.username = '';
+		}
+			
+	});
+
+	
 
 	this.doLogin = function(loginData){
 		app.loading= true;
@@ -26,6 +34,8 @@ angular.module('mainController',['authServices'])
 				//redirect to hombe page
 				$timeout(function(){
 					$location.path('/about');
+					app.loginData= '';
+					app.successMsg = false;
 				},2000);
 
 			}else{
