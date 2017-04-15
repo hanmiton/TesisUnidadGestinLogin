@@ -1,4 +1,6 @@
 var User = require('../models/user');
+var jwt = require('jsonwebtoken');
+var secret = 'harrypotter';
 
 module.exports = function(router){
 	// http://localhost:80/api/users
@@ -41,7 +43,8 @@ module.exports = function(router){
 					if(!validPassword){
 					res.json({success: false, message: 'No puede autentica password'});
 					} else {
-					res.json({success: true, message: 'User autenticado!'});
+					var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
+					res.json({success: true, message: 'User autenticado!', token: token});
 				}
 				} else {
 					res.json({ success: false, message : 'Password no ingresado'});

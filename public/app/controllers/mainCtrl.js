@@ -4,6 +4,12 @@ angular.module('mainController',['authServices'])
 	//console.log('hanmilton')
 	var app = this;
 
+	if (Auth.isLoggedIn()) {
+		console.log('Success: User is logged in.');
+	}else {
+		console.log('Failure: User is NOT logged in.');
+	}
+
 	this.doLogin = function(loginData){
 		app.loading= true;
 		app.errorMsg = false;
@@ -26,6 +32,14 @@ angular.module('mainController',['authServices'])
 			//console.log(this.loginData);
 			//console.log(data.data.message);
 		});
+	};
+
+	this.logout = function() {
+		Auth.logout();
+		$location.path('/logout');
+		$timeout(function(){
+			$location.path('/');
+		}, 2000);
 	};
 });
 	
