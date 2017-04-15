@@ -2,13 +2,21 @@
 	<h1>Perfil {{main.username}}</h1>
 </div>
 
-<table>
-	<tr>
-		<td>Username</td>
-		<td>Email</td>
-	</tr>
-	<tr>
-		<td> {{ main.username }} </td>
-		<td> {{ main.useremail}} </td>
-	</tr>
-</table>
+<div class="panel-info panel">
+	<div class="panel-heading" style="text-align:center;"><strong> User Profile</strong>		
+	</div>
+
+	<!-- Table -->
+	<table class= "table">
+		<tr>
+			<td> <strong>Username</strong></td>
+			<td> <strong>Email</strong></td>
+			<td> <strong>Password</strong></td>
+		</tr>
+		<tr>
+			<td> {{ main.username }} </td>
+			<td> {{ main.useremail}} </td>
+			<td>*************************</td>
+		</tr>
+	</table>
+</div>
