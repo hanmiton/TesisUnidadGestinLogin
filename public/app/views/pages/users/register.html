@@ -18,3 +18,19 @@
 	<br>
 	<button class= "btn btn-primary" type="submit">Registrar</button>
 </form>
+
+<br>
+
+<div class="jummbotron text-center" ng-show="register.loading">
+	<span class="glyphicon-repeat spinner glyphicon"></span>
+	<p>Cargando...</p>
+</div>
+<div class="show-hide-message row" ng-show="register.successMsg">
+	<div class="alert-success alert"> {{register.successMsg}}</div>
+</div>
+
+<br>
+
+<div class="show-hide-message row" ng-show="register.errorMsg">
+	<div class="alert-danger alert"> {{register.errorMsg}}</div>
+</div> 

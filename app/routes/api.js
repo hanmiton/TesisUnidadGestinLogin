@@ -11,13 +11,15 @@ module.exports = function(router){
 		user.password = req.body.password;
 		user.email = req.body.email;
 		if(req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == '' || req.body.email == null || req.body.email == ''){
-			res.send('Ensuere username, email, and password were provided');
+			//res.send('hola');
+			res.json({ success: false, message: 'Asegura tu nombre de usuario, email y contraseña'});
+			//res.json({ success: false, messaje: 'hola'});
 		}else{
 			user.save(function(err){
 				if(err){
-					res.send(err);
+					res.json({ success: false, message: 'Username o Email ya existen!.'});
 				} else {
-					res.send('user created!');
+					res.json({ success: true, message: 'user created!'});
 				}
 			}); 
 		}
