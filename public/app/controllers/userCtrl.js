@@ -27,4 +27,20 @@ angular.module('userControllers', ['userServices'])
 			//console.log(data.data.message);
 		});
 	};
+})
+
+.controller('facebookCtrl', function($routeParams, Auth, $location, $window) {
+	//console.log($routeParams.token);
+
+	var app = this;
+
+	if($window.location.pathname == '/facebookerror') {
+		app.errorMsg = 'Facebook user not found in database';
+	} else {
+
+		Auth.facebook($routeParams.token);
+		$location.path('/');
+	//	}
+	}
+
 });
