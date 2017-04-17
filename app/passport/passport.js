@@ -26,9 +26,9 @@ module.exports = function(app, passport){
 	    clientID: '640883526112072',
 	    clientSecret: '4aa8692b6efc199e81b0eb2a75e4211e',
 	    //callback local 
-	    callbackURL: "http://localhost:80/auth/facebook/callback",
+	   // callbackURL: "http://localhost:80/auth/facebook/callback",
 	    //callback deploy
-	    //callbackURL: "http://www.unidaddegestion.club/auth/facebook/callback",
+	    callbackURL: "http://www.unidaddegestion.club/auth/facebook/callback",
 	    //callbackURL: "http://www.example.com/auth/facebook/callback",
 	    profileFields : ['id', 'displayName', 'photos', 'email']
   	},
