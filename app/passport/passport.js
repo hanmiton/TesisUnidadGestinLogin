@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 var secret = 'harrypotter';
 //var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
 					
-module.exports = function(app,passport){
+module.exports = function(app, passport){
 
 	app.use(passport.initialize());
 	app.use(passport.session());
@@ -13,7 +13,7 @@ module.exports = function(app,passport){
 
 	passport.serializeUser(function(user, done){
 		token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});			
-		done(null, user.id);
+ 		done(null, user.id);
 	});
 
 	passport.deserializeUser(function(id, done) {
