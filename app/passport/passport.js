@@ -1,4 +1,5 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 var User = require('../models/user');
 var session = require('express-session');
 var jwt = require('jsonwebtoken');
@@ -55,6 +56,28 @@ module.exports = function(app, passport){
     	//done(null, profile);
   		}
 	));
+
+	  
+	passport.use(new TwitterStrategy({
+	    consumerKey: 'iPrfwMn1QYy1by3QF0o13xahj',
+	    consumerSecret: 'v9wwzm5zecH67q080gSvuI2IDd05W1343FZkqpoNWSyVFN5lU5',
+	    //Deploy version Twitter
+	    //callbackURL: "http://www.unidaddegestion.club/auth/twitter/callback",
+	    callbackURL: "http://localhost:80/auth/twitter/callback",
+	    userProfileURL: "http://api.twitter.com/1.1/account/verify_credentials.json?include_email=true"
+	  },
+	  function(token, tokenSecret, profile, done) {
+	   // User.findOrCreate(..., function(err, user) {
+	    //  if (err) { return done(err); }
+	     // done(null, user);
+	    //});
+	    done(null, profile);
+	  }
+	));
+
+	app.get('/auth/twitter', passport.authenticate('twitter'));
+
+	app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/twittererror' }));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect : '/facebookerror' }), function(req, res){
 		res.redirect('/facebook/' + token);

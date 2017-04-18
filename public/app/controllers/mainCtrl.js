@@ -33,7 +33,12 @@ angular.module('mainController',['authServices'])
 	this.facebook = function() {
 		//console.log($window.location);
 		$window.location = $window.location.protocol + '//' + $window.location.host + '/auth/facebook';
-	}
+	};
+
+	this.twitter = function() {
+		//console.log($window.location);
+		$window.location = $window.location.protocol + '//' + $window.location.host + '/auth/twitter';
+	};
 
 	this.doLogin = function(loginData){
 		app.loading= true;
