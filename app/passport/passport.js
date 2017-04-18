@@ -62,7 +62,7 @@ module.exports = function(app, passport){
 	    consumerKey: 'iPrfwMn1QYy1by3QF0o13xahj',
 	    consumerSecret: 'v9wwzm5zecH67q080gSvuI2IDd05W1343FZkqpoNWSyVFN5lU5',
 	    //Deploy version Twitter
-	    callbackURL: "http://www.unidaddegestion.club/auth/twitter/callback",
+	    callbackURL: "https://www.unidaddegestion.club/auth/twitter/callback",
 	    //callbackURL: "http://localhost:80/auth/twitter/callback",
 	    userProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true"
 	  },
