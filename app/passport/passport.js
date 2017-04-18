@@ -64,20 +64,33 @@ module.exports = function(app, passport){
 	    //Deploy version Twitter
 	    //callbackURL: "http://www.unidaddegestion.club/auth/twitter/callback",
 	    callbackURL: "http://localhost:80/auth/twitter/callback",
-	    userProfileURL: "http://api.twitter.com/1.1/account/verify_credentials.json?include_email=true"
+	    userProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true"
 	  },
 	  function(token, tokenSecret, profile, done) {
+	   //console.log(profile.emails[0].value);
 	   // User.findOrCreate(..., function(err, user) {
 	    //  if (err) { return done(err); }
 	     // done(null, user);
 	    //});
-	    done(null, profile);
+	    User.findOne({ email: profile.emails[0].value }).select('username password email').exec(function(err, user){
+    		console.log(user);
+    		if(err) done(err);
+
+    		if(user && user != null){
+    			done(null, user);
+    		}else{
+    			done(err);
+    		}
+    	});
+	    //done(null, profile);
 	  }
 	));
 
 	app.get('/auth/twitter', passport.authenticate('twitter'));
 
-	app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/twittererror' }));
+	app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/twittererror' }), function(req, res){
+		res.redirect('/twitter/' + token);
+	});
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {failureRedirect : '/facebookerror' }), function(req, res){
 		res.redirect('/facebook/' + token);

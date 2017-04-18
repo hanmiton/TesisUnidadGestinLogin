@@ -43,4 +43,20 @@ angular.module('userControllers', ['userServices'])
 	//	}
 	}
 
+})
+
+.controller('twitterCtrl', function($routeParams, Auth, $location, $window) {
+	//console.log($routeParams.token);
+
+	var app = this;
+
+	if($window.location.pathname == '/twittererror') {
+		app.errorMsg = 'Twitter user not found in database';
+	} else {
+
+		Auth.twitter($routeParams.token);
+		$location.path('/');
+	//	}
+	}
+
 });
