@@ -54,7 +54,7 @@ angular.module('userControllers', ['userServices'])
 		app.errorMsg = 'Twitter user not found in database';
 	} else {
 
-		Auth.twitter($routeParams.token);
+		Auth.facebookerror($routeParams.token);
 		$location.path('/');
 	//	}
 	}
