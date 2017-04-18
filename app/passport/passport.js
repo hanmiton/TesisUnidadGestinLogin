@@ -67,7 +67,7 @@ module.exports = function(app, passport){
 	    userProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true"
 	  },
 	  function(token, tokenSecret, profile, done) {
-	   //console.log(profile.emails[0].value);
+	   console.log(profile.emails[0].value);
 	   // User.findOrCreate(..., function(err, user) {
 	    //  if (err) { return done(err); }
 	     // done(null, user);
