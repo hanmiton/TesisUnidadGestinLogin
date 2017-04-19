@@ -59,7 +59,7 @@ angular.module('userControllers', ['userServices'])
 	//	}
 	}
 
-});
+})
 
 .controller('googleCtrl', function($routeParams, Auth, $location, $window) {
 	//console.log($routeParams.token);
