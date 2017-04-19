@@ -91,8 +91,8 @@ module.exports = function(app, passport){
 	passport.use(new GoogleStrategy({
 		consumerKey: '390328907928-o5vhaagenfe43mqm30gonrbmdvig3bqu.apps.googleusercontent.com',
 		consumerSecret: '-nGoBmQ4Xt7l3PO6cCjZkEif',
-	    callbackURL: "http://www.unidaddegestion.club/auth/google/callback"
-	  	// callbackURL: "http://localhost:5000/auth/google/callback"
+	    //callbackURL: "http://www.unidaddegestion.club/auth/google/callback"
+	  	 callbackURL: "http://localhost:5000/oauth2callback"
 	  },
 
 	  function(token, tokenSecret, profile, done) {
