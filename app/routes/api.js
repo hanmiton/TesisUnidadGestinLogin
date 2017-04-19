@@ -21,11 +21,31 @@ module.exports = function(router){
 		}else{
 			user.save(function(err){
 				if(err){
-					if(err.errors.name){
-						res.json({ success: false, message: err.errors.name.message});	
-					} else if (err.errors.email) {
-						res.json({ success: false, message: err.errors.email.message});
-					}	
+					if(err.errors != null){
+						if(err.errors.name){
+							res.json({ success: false, message: err.errors.name.message});	
+						} else if (err.errors.email) {
+							res.json({ success: false, message: err.errors.email.message});
+						} else if (err.errors.username) {
+							res.json({ success: false, message: err.errors.username.message});
+						} else if (err.errors.password) {
+							res.json({ success: false, message: err.errors.password.message});
+						} else {
+							res.json({ success: false, message: err})
+						}
+							
+					} else if (err){
+						if (err.code == 11000) {
+							if(err.errmsg[61] == "u"){
+								res.json({ success: false, message: 'Usuario ya esta en uso'});
+							} else if(err.errmsg[61] == "e"){
+								res.json({ success: false, message: 'Este email ya esta en uso '})
+							}
+							//res.json( { success: false, message : 'Nombre de usuario o email en uso!'})
+						} else {
+							res.json({ success: false, message: err });	
+						}
+					}
 				} else {
 					res.json({ success: true, message: 'usuario Creado!'});
 				}
