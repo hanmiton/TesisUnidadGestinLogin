@@ -3,6 +3,12 @@
 </div>
 
 <form ng-submit="register.regUser(regData);">
+	
+	<!-- Name -->
+	<label>Nombre:</label>
+	<input class= "form-control" type="text" name="name" placeholder="Nombre" ng-model="register.regData.name">
+	<br>
+
 	<!-- Email -->
 	<label>Email:</label>
 	<input class= "form-control" type="text" name="email" placeholder="Email" ng-model="register.regData.email">
