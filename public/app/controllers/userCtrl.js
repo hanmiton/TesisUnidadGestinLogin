@@ -35,7 +35,7 @@ angular.module('userControllers', ['userServices'])
 	var app = this;
 
 	if($window.location.pathname == '/facebookerror') {
-		app.errorMsg = 'Facebook user not found in database';
+		app.errorMsg = 'Facebook Usuario no encontrado en base de datos';
 	} else {
 
 		Auth.facebook($routeParams.token);
@@ -51,7 +51,23 @@ angular.module('userControllers', ['userServices'])
 	var app = this;
 
 	if($window.location.pathname == '/twittererror') {
-		app.errorMsg = 'Twitter user not found in database';
+		app.errorMsg = 'Twitter Usuario no encontrado en base de datos';
+	} else {
+
+		Auth.facebook($routeParams.token);
+		$location.path('/');
+	//	}
+	}
+
+});
+
+.controller('googleCtrl', function($routeParams, Auth, $location, $window) {
+	//console.log($routeParams.token);
+
+	var app = this;
+
+	if($window.location.pathname == '/googleerror') {
+		app.errorMsg = 'Google Usuario no encontrado en base de datos';
 	} else {
 
 		Auth.facebook($routeParams.token);

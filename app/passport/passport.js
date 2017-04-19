@@ -1,5 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 var User = require('../models/user');
 var session = require('express-session');
 var jwt = require('jsonwebtoken');
@@ -85,6 +86,29 @@ module.exports = function(app, passport){
 	    //done(null, profile);
 	  }
 	));
+
+	passport.use(new GoogleStrategy({
+		consumerKey: '390328907928-o5vhaagenfe43mqm30gonrbmdvig3bqu.apps.googleusercontent.com',
+		consumerSecret: '-nGoBmQ4Xt7l3PO6cCjZkEif',
+	    //callbackURL: "http://www.unidaddegestion.club/auth/google/callback"
+	  	 callbackURL: "http://localhost:5000/auth/google/callback"
+	  },
+
+	  function(token, tokenSecret, profile, done) {
+		console.log(profile);
+	//      User.findOrCreate({ googleId: profile.id }, function (err, user) {
+	  //      return done(err, user);
+	    //  });
+	    done(null, profile);
+	  }
+	));
+
+	app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
+
+	app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/googleerror' }), function(req, res) {
+	 res.redirect('/googleerror/' + token);
+	});
+	
 
 	app.get('/auth/twitter', passport.authenticate('twitter'));
 
