@@ -15,7 +15,7 @@
 	<button class= "btn btn-primary" type="submit">Login</button>
 	<button type="button" class="btn-success btn" ng-click= "main.facebook();">Facebook</button>
 	<button type="button" class="btn-warning btn" ng-click= "main.twitter();">Twitter</button>
-	<button type="button" class="btn-warning btn" ng-click= "main.google();">Google</button>
+	<button type="button" class="btn-info btn" ng-click= "main.google();">Google</button>
 </form>
 
 <br>
@@ -41,4 +41,8 @@
 
 <div class="show-hide-message row" ng-show="twitter.errorMsg">
 	<div class="alert-danger alert"> {{twitter.errorMsg}}</div>
+</div> 
+
+<div class="show-hide-message row" ng-show="google.errorMsg">
+	<div class="alert-danger alert"> {{google.errorMsg}}</div>
 </div> 

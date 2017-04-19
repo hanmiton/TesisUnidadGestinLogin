@@ -96,18 +96,24 @@ module.exports = function(app, passport){
 	  },
 
 	  function(token, tokenSecret, profile, done) {
-		console.log(profile);
-	//      User.findOrCreate({ googleId: profile.id }, function (err, user) {
-	  //      return done(err, user);
-	    //  });
-	    done(null, profile);
+		User.findOne({ email: profile.emails[0].value }).select('username password email').exec(function(err, user){
+    		//console.log(user);
+    		if(err) done(err);
+
+    		if(user && user != null){
+    			done(null, user);
+    		}else{
+    			done(err);
+    		}
+    	});
+	    //done(null, profile);
 	  }
 	));
 
-	app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
+	app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' , 'profile', 'email' }));
 
 	app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/googleerror' }), function(req, res) {
-	 res.redirect('/googleerror/' + token);
+	 res.redirect('/google/' + token);
 	});
 	
 
