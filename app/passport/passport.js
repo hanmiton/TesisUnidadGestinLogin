@@ -59,6 +59,7 @@ module.exports = function(app, passport){
 	));
 
 	  
+	  
 	passport.use(new TwitterStrategy({
 	    consumerKey: 'iPrfwMn1QYy1by3QF0o13xahj',
 	    consumerSecret: 'v9wwzm5zecH67q080gSvuI2IDd05W1343FZkqpoNWSyVFN5lU5',
