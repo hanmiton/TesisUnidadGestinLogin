@@ -59,7 +59,7 @@ module.exports = function(app, passport){
 	));
 
 	  
-	  
+
 	passport.use(new TwitterStrategy({
 	    consumerKey: 'iPrfwMn1QYy1by3QF0o13xahj',
 	    consumerSecret: 'v9wwzm5zecH67q080gSvuI2IDd05W1343FZkqpoNWSyVFN5lU5',
@@ -91,8 +91,8 @@ module.exports = function(app, passport){
 	passport.use(new GoogleStrategy({
 		consumerKey: '390328907928-o5vhaagenfe43mqm30gonrbmdvig3bqu.apps.googleusercontent.com',
 		consumerSecret: '-nGoBmQ4Xt7l3PO6cCjZkEif',
-	    //callbackURL: "http://www.unidaddegestion.club/auth/google/callback"
-	  	 callbackURL: "http://localhost:5000/auth/google/callback"
+	    callbackURL: "http://www.unidaddegestion.club/auth/google/callback"
+	  	// callbackURL: "http://localhost:5000/auth/google/callback"
 	  },
 
 	  function(token, tokenSecret, profile, done) {
