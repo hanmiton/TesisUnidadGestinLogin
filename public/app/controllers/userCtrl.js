@@ -4,12 +4,13 @@ angular.module('userControllers', ['userServices'])
 	
 	var app = this;
 
-	this.regUser = function(regData){
+	this.regUser = function(regData, valid){
 		app.loading= true;
 		app.errorMsg = false;
 		app.successMsg = false;
 		
-		User.create(app.regData).then(function(data){
+		if(valid){
+			User.create(app.regData).then(function(data){
 			if(data.data.success){
 				app.loading= false;
 				app.successMsg = data.data.message + '...Redirigiendo';
@@ -26,6 +27,13 @@ angular.module('userControllers', ['userServices'])
 			//console.log(this.regData);
 			//console.log(data.data.message);
 		});
+		} else {
+			//creacion de mensaje de error
+			app.loading = false;
+			app.errorMsg = "Porfavor asegurese de llenar apropiadamente los campos";
+		}
+
+		
 	};
 })
 

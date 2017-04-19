@@ -13,7 +13,7 @@ var nameValidator = [
 	validate({
 		validator: 'isLength',
 		arguments: [3, 20],
-		message: 'Nombre debe estar entre {ARGS[0] AND {ARGS[1]} caracteres'
+		message: 'Nombre debe estar entre {ARGS[0]} AND {ARGS[1]} caracteres'
 	})
 ];
 
