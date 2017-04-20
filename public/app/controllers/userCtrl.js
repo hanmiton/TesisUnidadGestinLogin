@@ -80,10 +80,15 @@ angular.module('userControllers', ['userServices'])
 		restrict : 'A',
 		controller: function($scope) {
 
+			$scope.confirmed = false;
+
 			$scope.doConfirm = function(values) {
 				values.forEach(function(ele){
-					console.log(ele);
-					console.log($scope.confirm);
+					if($scope.confirm == ele) {
+						$scope.confirmed = true;
+					} else {
+						$scope.confirmed = false;
+					}
 				});
 			}
 		},
