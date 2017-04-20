@@ -73,7 +73,25 @@ angular.module('userControllers', ['userServices'])
 		});
 	}
 
+})
 
+.directive('match', function(){
+	return {
+		restrict : 'A',
+		controller: function($scope) {
+
+			$scope.doConfirm = function() {
+				console.log(values);
+			}
+		},
+
+		link: function(scope, element, attrs) {
+
+			attrs.$observe('match', function(){
+				scope.doConfirm(attrs.match);
+			});
+		}
+	};
 })
 
 .controller('facebookCtrl', function($routeParams, Auth, $location, $window) {
