@@ -80,7 +80,7 @@ angular.module('userControllers', ['userServices'])
 		restrict : 'A',
 		controller: function($scope) {
 
-			$scope.doConfirm = function() {
+			$scope.doConfirm = function(values) {
 				console.log(values);
 			}
 		},
