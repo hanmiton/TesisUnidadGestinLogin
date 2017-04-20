@@ -70,12 +70,12 @@
 
 <br>
 
-<input type="text" name="firstPassword">
+<input type="text" name="firstPassword" ng-model="firstPassword">
 
 <br>
 <br>
 
-<input type="text" name="confirmPassword" match="harry potter">
+<input type="text" name="confirmPassword" match="{{[firstPassword]}}">
 
 <br>
 
