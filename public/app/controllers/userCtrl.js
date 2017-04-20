@@ -81,14 +81,23 @@ angular.module('userControllers', ['userServices'])
 		controller: function($scope) {
 
 			$scope.doConfirm = function(values) {
-				console.log(values);
+				values.forEach(function(ele){
+					console.log(ele);
+					console.log($scope.confirm);
+				});
 			}
 		},
 
 		link: function(scope, element, attrs) {
 
 			attrs.$observe('match', function(){
-				scope.doConfirm(attrs.match);
+				scope.matches = JSON.parse(attrs.match);
+				scope.doConfirm(scope.matches);
+			});
+
+			scope.$watch('confirm', function(){
+				scope.matches = JSON.parse(attrs.match);
+				scope.doConfirm(scope.matches);
 			});
 		}
 	};
