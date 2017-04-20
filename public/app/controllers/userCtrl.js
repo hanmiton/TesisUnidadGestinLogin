@@ -38,10 +38,42 @@ angular.module('userControllers', ['userServices'])
 
 
 	this.checkUsername = function(regData){
+		app.checkingUsername = true;
+		app.usernameMsg = false;
+		app.usernameInvalid = false;
+
 		User.checkUsername(app.regData).then(function(data) {
-			console.log(data);
-		})
+			if(data.data.success){
+				app.checkingUsername = false;
+				app.usernameInvalid = false;
+				app.usernameMsg = data.data.message;
+			}else{
+				app.checkingUsername = false;
+				app.usernameInvalid = true;
+				app.usernameMsg = data.data.message;
+			}
+		});
 	}
+
+	this.checkEmail = function(regData){
+		app.checkingEmail = true;
+		app.emailMsg = false;
+		app.emailInvalid = false;
+
+		User.checkEmail(app.regData).then(function(data) {
+			if(data.data.success){
+				app.checkingEmail = false;
+				app.emailInvalid = false;
+				app.emailMsg = data.data.message;
+			}else{
+				app.checkingEmail = false;
+				app.emailInvalid = true;
+				app.emailMsg = data.data.message;
+			}
+		});
+	}
+
+
 })
 
 .controller('facebookCtrl', function($routeParams, Auth, $location, $window) {

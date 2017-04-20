@@ -36,6 +36,7 @@
 		<label>Username:</label>
 		<input class= "form-control" type="text" name="username" placeholder="username" ng-model="register.regData.username"  ng-pattern="/^(?!.*?[\W])(?=.*?[a-zA-Z]|=.*?[A-Z]).{3,16}$/" ng-minLength="8" ng-maxLength="35" ng-blur="register.checkUsername(regData);" required>	
 		<p class= "help-block" ng-show="(!regForm.username.$pristine && regForm.username.$error.required) || (regForm.$submitted && regForm.username.$error.required)">Este campo es requerido</p>
+		<p class= "help-block" ng-show="register.usernameMsg">{{register.usernameMsg}}</p>
 		<ul ng-show="(!regForm.username.$pristine && regForm.username.$error.pattern) || (!regForm.username.$pristine && regForm.username.$error.minlength) || (!regForm.username.$pristine && regForm.username.$error.maxlength)" class="help-block">
 			<li>No debe contener ningun caracter especial</li>
 			<li>Debe tener entre 3 a 25 caracteres</li>
