@@ -35,6 +35,13 @@ angular.module('userControllers', ['userServices'])
 
 		
 	};
+
+
+	this.checkUsername = function(regData){
+		User.checkUsername(app.regData).then(function(data) {
+			console.log(data);
+		})
+	}
 })
 
 .controller('facebookCtrl', function($routeParams, Auth, $location, $window) {
