@@ -18,11 +18,12 @@
 	
 	<br>
 	
-	<div ng-class="{'has-success':(regForm.email.$valid && !regForm.email.$pristine), 'has-error' : (!regForm.email.$valid && !regForm.email.$pristine) || (!regForm.email.$valid && regForm.$submitted)}">
+	<div ng-class="{'has-success':(regForm.email.$valid && !regForm.email.$pristine && !register.emailInvalid), 'has-error' : (!regForm.email.$valid && !regForm.email.$pristine) || (!regForm.email.$valid && regForm.$submitted) || register.emailInvalid}">
 		<!-- Email -->
 		<label>Email:</label>
-		<input class= "form-control" type="text" name="email" placeholder="Email" ng-model="register.regData.email"  ng-pattern="/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" ng-minLength="3" ng-maxLength="25" required>	
+		<input class= "form-control" type="text" name="email" placeholder="Email" ng-model="register.regData.email"  ng-pattern="/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" ng-blur="register.checkEmail(regData);" ng-minLength="3" ng-maxLength="25" required>	
 		<p class= "help-block" ng-show="(!regForm.email.$pristine && regForm.email.$error.required) || (regForm.$submitted && regForm.email.$error.required)">Este campo es requerido</p>
+		<p class= "help-block" ng-show="register.emailMsg">{{register.emailMsg}}</p>
 		<ul ng-show="(!regForm.email.$pristine && regForm.email.$error.pattern) || (!regForm.email.$pristine && regForm.email.$error.minlength) || (!regForm.email.$pristine && regForm.email.$error.maxlength)" class="help-block">
 			<li>Debe contener @</li>
 			<li>Deberia no conetener ningun caracter especial</li>
@@ -31,7 +32,7 @@
 	</div>
 	
 	<br>
-	<div ng-class="{'has-success':(regForm.username.$valid && !regForm.username.$pristine), 'has-error' : (!regForm.username.$valid && !regForm.username.$pristine) || (!regForm.username.$valid && regForm.$submitted)}">
+	<div ng-class="{'has-success':(regForm.username.$valid && !regForm.username.$pristine && !register.usernameInvalid), 'has-error' : (!regForm.username.$valid && !regForm.username.$pristine) || (!regForm.username.$valid && regForm.$submitted) || register.usernameInvalid}">
 		<!-- username -->
 		<label>Username:</label>
 		<input class= "form-control" type="text" name="username" placeholder="username" ng-model="register.regData.username"  ng-pattern="/^(?!.*?[\W])(?=.*?[a-zA-Z]|=.*?[A-Z]).{3,16}$/" ng-minLength="8" ng-maxLength="35" ng-blur="register.checkUsername(regData);" required>	

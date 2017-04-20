@@ -56,8 +56,8 @@ module.exports = function(router){
 	router.post('/checkusername', function(req, res){
 		User.findOne({ username: req.body.username}).select('username').exec(function(err, user){
 			if(err) throw err;
-			//console.log(user);
-			if (!user){
+			console.log(user);
+			if (user){
 				res.json({success:false, message: 'Username en uso'});
 				
 			}else {
@@ -70,7 +70,7 @@ module.exports = function(router){
 		User.findOne({ email: req.body.email}).select('email').exec(function(err, user){
 			if(err) throw err;
 			//console.log(user);
-			if (!user){
+			if (user){
 				res.json({success:false, message: 'email en uso'});
 				
 			}else {
