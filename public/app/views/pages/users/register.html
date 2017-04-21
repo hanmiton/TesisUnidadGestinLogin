@@ -51,12 +51,12 @@
 	<label>Password</label>
 	<input class= "form-control"  type="password" name="password" placeholder="Contraseña" ng-model="register.regData.password">
 	-->
-	<div ng-class="{'has-success':(regForm.password.$valid && !regForm.password.$pristine), 'has-error' : (!regForm.password.$valid && !regForm.password.$pristine) || (!regForm.password.$valid && regForm.$submitted)}">
-		<!-- password -->
-		<label>password:</label>
-		<input class= "form-control" type="password" name="password" placeholder="password" ng-model="register.regData.password"  ng-pattern="/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/" ng-minLength="8" ng-maxLength="35" required>	
-		<p class= "help-block" ng-show="(!regForm.password.$pristine && regForm.password.$error.required) || (regForm.$submitted && regForm.password.$error.required)">Este campo es requerido</p>
-		<ul ng-show="(!regForm.password.$pristine && regForm.password.$error.pattern) || (!regForm.password.$pristine && regForm.password.$error.minlength) || (!regForm.password.$pristine && regForm.password.$error.maxlength)" class="help-block">
+	<div ng-class="{'has-success':(regForm.firstPassword.$valid && !regForm.firstPassword.$pristine), 'has-error' : (!regForm.firstPassword.$valid && !regForm.firstPassword.$pristine) || (!regForm.firstPassword.$valid && regForm.$submitted)}">
+		<!-- firstPassword -->
+		<label>firstPassword:</label>
+		<input class= "form-control" type="password" name="firstPassword" placeholder="Password" ng-model="firstPassword"  ng-pattern="/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/" ng-minLength="8" ng-maxLength="35" required>	
+		<p class= "help-block" ng-show="(!regForm.firstPassword.$pristine && regForm.firstPassword.$error.required) || (regForm.$submitted && regForm.firstPassword.$error.required)">Este campo es requerido</p>
+		<ul ng-show="(!regForm.firstPassword.$pristine && regForm.firstPassword.$error.pattern) || (!regForm.firstPassword.$pristine && regForm.firstPassword.$error.minlength) || (!regForm.firstPassword.$pristine && regForm.firstPassword.$error.maxlength)" class="help-block">
 			<li>Debe contener por lo menos una letra mayuscula</li>
 			<li>Debe contener por lo menos una letra minuscula</li>
 			<li>Debe contener por lo menos un numero</li>
@@ -65,18 +65,23 @@
 		</ul>
 	</div>
 	<br>
+
+	<!--Confirm Password -->
+	<!--
+	<label>Password</label>
+	<input class= "form-control"  type="password" name="password" placeholder="Contraseña" ng-model="register.regData.password">
+	-->
+	<div ng-class="{'has-success': confirmed && !regForm.confirmPassword.$error.required, 'has-error' : (!confirmed && !regForm.confirmPassword.$error.required) || (regForm.confirmPassword.$error.required && !regForm.confirmPassword.$pristine) || (regForm.$submitted && regForm.confirmPassword.$error.required) }">
+		<!-- password -->
+		<label>Confirm confirmPassword:</label>
+		<input class= "form-control" type="password" name="confirmPassword" placeholder="Confirmar password" match={{[firstPassword]}} ng-change= "register.regData.password= confirm" ng-model="confirm"  ng-pattern="/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/" ng-minLength="8" ng-maxLength="35" required>	
+		<p class= "help-block" ng-show="(!regForm.confirmPassword.$pristine && regForm.confirmPassword.$error.required) || (regForm.$submitted && regForm.confirmPassword.$error.required)">Este campo es requerido</p>
+		<p class= "help-block" ng-show="!confirmed && !regForm.confirmPassword.$pristine && regForm.firstPassword.$valid"> Password no conciden</p>
+	</div>
+	<br>
+
 	<button class= "btn btn-primary" type="submit">Registrar</button>
 </form>
-
-<br>
-
-<input type="text" name="firstPassword" ng-model="firstPassword">
-
-<br>
-<br>
-
-<input type="text" name="confirmPassword" ng-model="confirm" match="{{[firstPassword]}}">
-<p ng-show="!confirmed">Password no son iguales</p>
 
 <br>
 
