@@ -67,10 +67,11 @@ module.exports = function(router){
 					var email = {
 					  from: 'Localhost Staff, staff@localhost.com',
 					  to: user.email,
-					  subject: 'Localhost Enlace de Activación',
+					  subject: 'unidaddegestion.club Enlace de Activación',
 					  text: 'Hola' + user.name + ',gracias por registrate en unidaddegestion.club. Porfavor click en el siguiente link para completar la activación.',
-					  html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="http://localhost:5000/activate/' + user.temporarytoken + '">http://localhost:5000/activate/</a>'
-
+					//local
+					html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="http://localhost:5000/activate/' + user.temporarytoken + '">http://localhost:5000/activate/</a>'
+					 // html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="https://www.unidaddegestion.club/activate/' + user.temporarytoken + '">https://www.unidaddegestion.club/activate/</a>'
 					};
 
 					client.sendMail(email, function(err, info){
@@ -78,7 +79,7 @@ module.exports = function(router){
 					      console.log(error);
 					    }
 					    else {
-					      console.log('Message sent: ' + info.response);
+					      console.log('Mensaje enviado ' + info.response);
 					    }
 					});
 					
@@ -202,7 +203,6 @@ module.exports = function(router){
 			res.json({ success: false, message : 'No token provided'});
 		}
 	})
-
 	router.post('/me', function(req,res){
 		res.send(req.decoded);
 	});
