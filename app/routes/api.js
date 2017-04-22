@@ -120,18 +120,21 @@ module.exports = function(router){
 	//user login route
 	// http://localhost:port/api/authenticate
 	router.post('/authenticate', function(req, res){
-		User.findOne({ username: req.body.username}).select('email username password').exec(function(err, user){
+		User.findOne({ username: req.body.username}).select('email username password active').exec(function(err, user){
 			if(err) throw err;
-			console.log(user);
+			
 			if (!user){
-				res.json({success:false, message: 'No se puede autenticar usuario'});
-				
+				res.json({success:false, message: 'No se puede autenticar usuario'});	
 			}else if (user){
 				if(req.body.password){
 					var validPassword = user.comparePassword(req.body.password);	
 					if(!validPassword){
 					res.json({success: false, message: 'No puede autentica password'});
-					} else {
+					} else if(!user.active){
+						res.json({success: false, message: 'Cuenta todavia no activada, Por favor rebiza tu e-mail por el link de ativacion'})
+					}
+
+					else {
 					var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
 					res.json({success: true, message: 'User autenticado!', token: token});
 				}
@@ -145,12 +148,12 @@ module.exports = function(router){
 	});
 
 	router.put('/activate/:token', function(req,res){
-		console.log('ruta put');
+		console.log(req.params.token);
 		
-		User.findOne({temporarytoken: req.params.token}, function(err, user){
+		User.findOne({ temporarytoken: req.params.token}, function(err, user){
 			if (err) throw err;
-			var token = req.paramas.token;
-
+			var token = req.params.token;
+			//console.log(user);
 			jwt.verify(token, secret, function(err, decoded){
 				if(err){
 					res.json({ success: false, message: 'Enlace de activacion esta expirado.'});

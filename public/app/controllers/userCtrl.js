@@ -74,9 +74,27 @@ angular.module('userControllers', ['userServices'])
 	}
 
 })
+//Modificar para funcionar modular
+.controller('emailCtrl', function($routeParams, User, $timeout, $location){
+		//console.log($routeParams.token);
+		app = this;
+		
+		User.activeAccount($routeParams.token).then(function(data){
+			app.successMsg = false;
+			app.errorMsg = false;
 
-.controller('emailCtrl', function(){
-		console.log('controlador emailCtrl');
+			if(data.data.success){
+				app.successMsg = data.data.message + '...Redirecting';
+				$timeout(function(){
+					$location.path('/login');
+				} , 2000);
+			} else {
+				app.errorMsg = data.data.message + '...Redirecting';
+				$timeout(function(){
+					$location.path('/login');
+				}, 2000);
+			}
+		});
 	})
 
 .directive('match', function(){
