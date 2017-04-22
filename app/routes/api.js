@@ -131,7 +131,7 @@ module.exports = function(router){
 					if(!validPassword){
 					res.json({success: false, message: 'No puede autentica password'});
 					} else if(!user.active){
-						res.json({success: false, message: 'Cuenta todavia no activada, Por favor rebiza tu e-mail por el link de ativacion'})
+						res.json({success: false, message: 'Cuenta todavia no activada, Por favor rebiza tu e-mail por el link de ativacion', expired: true});
 					}
 
 					else {

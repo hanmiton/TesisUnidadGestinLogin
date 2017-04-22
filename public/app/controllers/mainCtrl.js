@@ -49,6 +49,7 @@ angular.module('mainController',['authServices'])
 		app.loading= true;
 		app.errorMsg = false;
 		app.successMsg = false;
+		app.expired = false;
 		
 		Auth.login(app.loginData).then(function(data){
 			if(data.data.success){
@@ -62,8 +63,16 @@ angular.module('mainController',['authServices'])
 				},2000);
 
 			}else{
-				app.loading= false;
-				app.errorMsg = data.data.message;
+				if(data.data.expired){
+					//Create an error message
+					app.expired = true;
+					app.loading = false;
+					app.errorMsg = data.data.message;
+				} else {
+					//Create on error message
+					app.loading = false;
+					app.errorMsg = data.data.message;
+				}
 			}
 
 			//console.log(this.loginData);

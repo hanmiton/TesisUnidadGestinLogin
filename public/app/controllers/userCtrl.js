@@ -134,9 +134,12 @@ angular.module('userControllers', ['userServices'])
 	//console.log($routeParams.token);
 
 	var app = this;
+	app.errorMsg = false;
 
 	if($window.location.pathname == '/facebookerror') {
 		app.errorMsg = 'Facebook Usuario no encontrado en base de datos';
+	} else if ($window.location.pathname  == '/facebook/inactive/error'){
+		app.errorMsg = 'Cuenta todavia no esta activada. Porfavor rebiza tu correo'
 	} else {
 
 		Auth.facebook($routeParams.token);
@@ -150,10 +153,13 @@ angular.module('userControllers', ['userServices'])
 	//console.log($routeParams.token);
 
 	var app = this;
+	app.errorMsg = false;
 
 	if($window.location.pathname == '/twittererror') {
 		app.errorMsg = 'Twitter Usuario no encontrado en base de datos';
-	} else {
+	} else if ($window.location.pathname  == '/twitter/inactive/error'){
+		app.errorMsg = 'Cuenta todavia no esta activada. Porfavor rebiza tu correo'
+	}else {
 
 		Auth.facebook($routeParams.token);
 		$location.path('/');
@@ -166,9 +172,12 @@ angular.module('userControllers', ['userServices'])
 	//console.log($routeParams.token);
 
 	var app = this;
+	app.errorMsg = false;
 
 	if($window.location.pathname == '/googleerror') {
 		app.errorMsg = 'Google Usuario no encontrado en base de datos';
+	} else if ($window.location.pathname  == '/google/inactive/error'){
+		app.errorMsg = 'Cuenta todavia no esta activada. Porfavor rebiza tu correo'
 	} else {
 
 		Auth.facebook($routeParams.token);
