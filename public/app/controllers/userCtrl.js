@@ -75,6 +75,10 @@ angular.module('userControllers', ['userServices'])
 
 })
 
+.controller('emailCtrl', function(){
+		console.log('controlador emailCtrl');
+	})
+
 .directive('match', function(){
 	return {
 		restrict : 'A',

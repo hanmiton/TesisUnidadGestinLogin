@@ -80,7 +80,7 @@ module.exports = function(router){
 					    }
 					    else {
 					      console.log('Mensaje enviado ' + info.response);
-					    }
+					    }	
 					});
 					
 					res.json({ success: true, message: 'Cuenta registrada! Por favor rebiza tu correo para el link de ativacion.'});
@@ -145,6 +145,8 @@ module.exports = function(router){
 	});
 
 	router.put('/activate/:token', function(req,res){
+		console.log('ruta put');
+		
 		User.findOne({temporarytoken: req.params.token}, function(err, user){
 			if (err) throw err;
 			var token = req.paramas.token;
