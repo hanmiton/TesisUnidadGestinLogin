@@ -37,13 +37,13 @@
 </div> 
 
 <div class="show-hide-message row" ng-show="facebook.errorMsg">
-	<div class="alert-danger alert"> {{facebook.errorMsg}}</div>
+	<div class="alert-danger alert"> {{facebook.errorMsg}}&nbsp<a ng-show="main.expired" href="/resend"><button type="button" class="btn btn-success"> Enlace de activacion reenviado</button> </a></div>
 </div> 
 
 <div class="show-hide-message row" ng-show="twitter.errorMsg">
-	<div class="alert-danger alert"> {{twitter.errorMsg}}</div>
+	<div class="alert-danger alert"> {{twitter.errorMsg}}&nbsp<a ng-show="main.expired" href="/resend"><button type="button" class="btn btn-success"> Enlace de activacion reenviado</button> </a></div>
 </div> 
 
 <div class="show-hide-message row" ng-show="google.errorMsg">
-	<div class="alert-danger alert"> {{google.errorMsg}}</div>
+	<div class="alert-danger alert"> {{google.errorMsg}}&nbsp<a ng-show="main.expired" href="/resend"><button type="button" class="btn btn-success"> Enlace de activacion reenviado</button> </a></div>
 </div> 

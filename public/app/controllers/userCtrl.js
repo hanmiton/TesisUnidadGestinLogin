@@ -97,6 +97,10 @@ angular.module('userControllers', ['userServices'])
 		});
 	})
 
+.controller('resendCtrl', function(){
+	
+})
+
 .directive('match', function(){
 	return {
 		restrict : 'A',
@@ -135,10 +139,13 @@ angular.module('userControllers', ['userServices'])
 
 	var app = this;
 	app.errorMsg = false;
+	app.expired = false;
+
 
 	if($window.location.pathname == '/facebookerror') {
 		app.errorMsg = 'Facebook Usuario no encontrado en base de datos';
 	} else if ($window.location.pathname  == '/facebook/inactive/error'){
+		app.expired = true;
 		app.errorMsg = 'Cuenta todavia no esta activada. Porfavor rebiza tu correo'
 	} else {
 
@@ -154,10 +161,12 @@ angular.module('userControllers', ['userServices'])
 
 	var app = this;
 	app.errorMsg = false;
+	app.expired = false;
 
 	if($window.location.pathname == '/twittererror') {
 		app.errorMsg = 'Twitter Usuario no encontrado en base de datos';
 	} else if ($window.location.pathname  == '/twitter/inactive/error'){
+		app.expired = true;
 		app.errorMsg = 'Cuenta todavia no esta activada. Porfavor rebiza tu correo'
 	}else {
 
@@ -173,10 +182,13 @@ angular.module('userControllers', ['userServices'])
 
 	var app = this;
 	app.errorMsg = false;
+	app.expired = false;
+
 
 	if($window.location.pathname == '/googleerror') {
 		app.errorMsg = 'Google Usuario no encontrado en base de datos';
 	} else if ($window.location.pathname  == '/google/inactive/error'){
+		app.expired = true;
 		app.errorMsg = 'Cuenta todavia no esta activada. Porfavor rebiza tu correo'
 	} else {
 
