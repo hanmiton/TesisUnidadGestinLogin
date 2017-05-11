@@ -225,7 +225,7 @@ module.exports = function(router){
 			user.temporarytoken = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
 			user.save(function(err){
 				if (err) {
-					console.log(err),
+					console.log(err);
 				} else {
 
 					var email = {
