@@ -207,7 +207,7 @@ module.exports = function(router){
 						res.json({success: false, message: 'Cuenta ya esta activada.'});
 					}
 					else {
-					res.json({user: user});
+					res.json({ success: true, user: user});
 				}
 				} else {
 					res.json({ success: false, message : 'Password no ingresado'});

@@ -101,8 +101,13 @@ angular.module('userControllers', ['userServices'])
 	app = this;
 
 	app.checkCredentials = function(loginData){
+		app.errorMsg = false;
 		User.checkCredentials(app.loginData).then(function(data){
-			console.log(data);
+			if(data.data.success){
+
+			} else {
+				app.errorMsg = data.data.message;
+			}
 		});
 	};
 })
