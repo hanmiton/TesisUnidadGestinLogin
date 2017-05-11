@@ -97,8 +97,14 @@ angular.module('userControllers', ['userServices'])
 		});
 	})
 
-.controller('resendCtrl', function(){
-	
+.controller('resendCtrl', function(User){
+	app = this;
+
+	app.checkCredentials = function(loginData){
+		User.checkCredentials(app.loginData).then(function(data){
+			console.log(data);
+		});
+	};
 })
 
 

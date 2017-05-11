@@ -23,6 +23,11 @@ angular.module('userServices', [])
 			return $http.put('/api/activate/' + token);
 		}
 
+		//User.checkCredentials(loginData);
+		userFactory.checkCredentials = function(loginData){
+			return $http.post('/api/resend', loginData);
+		}
+
 		
 		return userFactory;
 });

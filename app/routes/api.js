@@ -128,12 +128,12 @@ module.exports = function(router){
 			}else if (user){
 				if(req.body.password){
 					var validPassword = user.comparePassword(req.body.password);	
-				if(!validPassword){
+					if(!validPassword){
 					res.json({success: false, message: 'No puede autentica password'});
-				} else if(!user.active){
+					} else if(!user.active){
 						res.json({success: false, message: 'Cuenta todavia no activada, Por favor rebiza tu e-mail por el link de ativacion', expired: true});
 					}
-				else {
+					else {
 					var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
 					res.json({success: true, message: 'User autenticado!', token: token});
 				}
@@ -190,6 +190,34 @@ module.exports = function(router){
 			});
 		});
 	});
+
+
+	router.post('/resend', function(req, res){
+		User.findOne({ username: req.body.username}).select('username password active').exec(function(err, user){
+			if(err) throw err;
+			
+			if (!user){
+				res.json({success:false, message: 'No se puede autenticar usuario'});	
+			}else if (user){
+				if(req.body.password){
+					var validPassword = user.comparePassword(req.body.password);	
+					if(!validPassword){
+					res.json({success: false, message: 'No puede autentica password'});
+					} else if(user.active){
+						res.json({success: false, message: 'Cuenta ya esta activada.'});
+					}
+					else {
+					res.json({user: user});
+				}
+				} else {
+					res.json({ success: false, message : 'Password no ingresado'});
+				}
+				
+				
+			}
+		});
+	});
+
 
 	router.use(function(req, res, next) {
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
