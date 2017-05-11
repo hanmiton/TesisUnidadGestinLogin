@@ -104,7 +104,9 @@ angular.module('userControllers', ['userServices'])
 		app.errorMsg = false;
 		User.checkCredentials(app.loginData).then(function(data){
 			if(data.data.success){
-
+				User.resendLink(app.loginData).then(function(data){
+					console.log(data);
+				});
 			} else {
 				app.errorMsg = data.data.message;
 			}

@@ -28,6 +28,10 @@ angular.module('userServices', [])
 			return $http.post('/api/resend', loginData);
 		}
 
+		//User.resendLink(username);
+		userFactory.resendLink = function(username){
+			return $http.put('/api/resend', username);
+		}
 		
 		return userFactory;
 });

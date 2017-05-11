@@ -219,6 +219,40 @@ module.exports = function(router){
 	});
 
 
+	router.put('/resend', function(req, res){
+		User.findOne({ username: req.body.username}).select('username name email temporarytoken').exec( function(err, user){
+			if(err) throw err;
+			user.temporarytoken = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
+			user.save(function(err){
+				if (err) {
+					console.log(err),
+				} else {
+
+					var email = {
+					  from: 'Localhost Staff, staff@localhost.com',
+					  to: user.email,
+					  subject: 'unidaddegestion.club Enlace de Activación',
+					  text: 'Hola' + user.name + ',gracias por registrate en unidaddegestion.club. Porfavor click en el siguiente link para completar la activación.',
+					//local
+					//html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="http://localhost:5000/activate/' + user.temporarytoken + '">http://localhost:5000/activate/</a>'
+					html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="https://www.unidaddegestion.club/activate/' + user.temporarytoken + '">https://www.unidaddegestion.club/activate/</a>'
+					};
+
+					client.sendMail(email, function(err, info){
+					    if (err ){
+					      console.log(error);
+					    }
+					    else {
+					      console.log('Mensaje enviado ' + info.response);
+					    }	
+					});
+					res.json({ success: true, message: 'Link de activación fue enviado' + user.email + '!'});
+				}
+			});
+	
+		})
+	});
+
 	router.use(function(req, res, next) {
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
 
