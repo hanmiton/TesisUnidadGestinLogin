@@ -8,6 +8,9 @@ header .navbar {
 	color:red;
 }
 
+.reset {
+	float: right;
+}
 /* show and hide */
 .show-hide-message.ng-hide-remove {
 	-webkit-animation:zoomIn 0.3s both ease;
