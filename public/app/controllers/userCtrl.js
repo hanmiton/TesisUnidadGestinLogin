@@ -5,6 +5,7 @@ angular.module('userControllers', ['userServices'])
 	var app = this;
 
 	this.regUser = function(regData, valid){
+		app.disabled = true;
 		app.loading= true;
 		app.errorMsg = false;
 		app.successMsg = false;
@@ -15,12 +16,13 @@ angular.module('userControllers', ['userServices'])
 				app.loading= false;
 				app.successMsg = data.data.message + '...Redirigiendo';
 				//redirect to hombe page
-				$timeout(function(){
-					$location.path('/');
-				},2000);
+				//$timeout(function(){
+				//	$location.path('/');
+				//},2000);
 
 			}else{
 				app.loading= false;
+				app.disabled = false;
 				app.errorMsg = data.data.message;
 			}
 
@@ -28,6 +30,7 @@ angular.module('userControllers', ['userServices'])
 			//console.log(data.data.message);
 		});
 		} else {
+			app.disabled = false;
 			//creacion de mensaje de error
 			app.loading = false;
 			app.errorMsg = "Porfavor asegurese de llenar apropiadamente los campos";
@@ -101,15 +104,19 @@ angular.module('userControllers', ['userServices'])
 	app = this;
 
 	app.checkCredentials = function(loginData){
+		app.disabled = true;
 		app.errorMsg = false;
 		app.successMsg = false;
 
 		User.checkCredentials(app.loginData).then(function(data){
 			if(data.data.success){
 				User.resendLink(app.loginData).then(function(data){
-					app.successMsg = data.data.message;
+					if (data.data.success) {
+						app.successMsg = data.data.message;	
+					}
 				});
 			} else {
+				app.disabled = true;
 				app.errorMsg = data.data.message;
 			}
 		});

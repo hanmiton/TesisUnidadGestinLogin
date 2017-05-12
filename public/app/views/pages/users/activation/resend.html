@@ -6,13 +6,13 @@
 	
 	<!--Username -->
 	<label>Username</label>
-	<input class= "form-control"  type="text" name="username" placeholder="Nombre Usuario" ng-model="resend.loginData.username">
+	<input ng-disabled="resend.disabled" class= "form-control"  type="text" name="username" placeholder="Nombre Usuario" ng-model="resend.loginData.username">
 	<br>
 
 	<label>Password</label>
-	<input class= "form-control"  type="password" name="password" placeholder="Contraseña" ng-model="resend.loginData.password">
+	<input ng-disabled="resend.disabled" class= "form-control"  type="password" name="password" placeholder="Contraseña" ng-model="resend.loginData.password">
 	<br>
-	<button class= "btn btn-primary" type="submit">Enviar</button>
+	<button ng-disabled="resend.disabled" class= "btn btn-primary" type="submit">Enviar</button>
 	
 </form>
 
