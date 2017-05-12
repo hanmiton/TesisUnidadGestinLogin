@@ -235,7 +235,7 @@ module.exports = function(router){
 					  text: 'Hola' + user.name + ',gracias por registrate en unidaddegestion.club. Porfavor click en el siguiente link para completar la activación.',
 					//local
 					//html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="http://localhost:5000/activate/' + user.temporarytoken + '">http://localhost:5000/activate/</a>'
-					html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="https://www.unidaddegestion.club/activate/' + user.temporarytoken + '">https://www.unidaddegestion.club/activate/</a>'
+					html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Usted a solicitado un reenvio del link de activacion de unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="https://www.unidaddegestion.club/activate/' + user.temporarytoken + '">https://www.unidaddegestion.club/activate/</a>'
 					};
 
 					client.sendMail(email, function(err, info){

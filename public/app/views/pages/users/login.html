@@ -6,16 +6,16 @@
 	
 	<!--Username -->
 	<label>Username</label>
-	<input class= "form-control"  type="text" name="username" placeholder="Nombre Usuario" ng-model="main.loginData.username">
+	<input ng-disabled= "main.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "form-control"  type="text" name="username" placeholder="Nombre Usuario" ng-model="main.loginData.username">
 	<br>
 
 	<label>Password</label>
-	<input class= "form-control"  type="password" name="password" placeholder="Contraseña" ng-model="main.loginData.password">
+	<input ng-disabled= "main.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "form-control"  type="password" name="password" placeholder="Contraseña" ng-model="main.loginData.password">
 	<br>
-	<button class= "btn btn-primary" type="submit">Login</button>
-	<button type="button" class="btn-success btn" ng-click= "main.facebook();">Facebook</button>
-	<button type="button" class="btn-warning btn" ng-click= "main.twitter();">Twitter</button>
-	<button type="button" class="btn-info btn" ng-click= "main.google();">Google</button>
+	<button ng-disabled= "main.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "btn btn-primary" type="submit">Login</button>
+	<button ng-disabled= "main.disabled || facebook.disabled || twitter.disabled || google.disabled" type="button" class="btn-success btn" ng-click= "main.facebook();">Facebook</button>
+	<button ng-disabled= "main.disabled || facebook.disabled || twitter.disabled || google.disabled" type="button" class="btn-warning btn" ng-click= "main.twitter();">Twitter</button>
+	<button ng-disabled= "main.disabled || facebook.disabled || twitter.disabled || google.disabled" type="button" class="btn-info btn" ng-click= "main.google();">Google</button>
 </form>
 
 <br>

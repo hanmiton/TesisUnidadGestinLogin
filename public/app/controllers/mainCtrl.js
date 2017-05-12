@@ -31,16 +31,19 @@ angular.module('mainController',['authServices'])
 
 	
 	this.facebook = function() {
+		app.disabled = true; 
 		//console.log($window.location);
 		$window.location = $window.location.protocol + '//' + $window.location.host + '/auth/facebook';
 	};
 
 	this.twitter = function() {
+		app.disabled = true; 
 		//console.log($window.location);
 		$window.location = $window.location.protocol + '//' + $window.location.host + '/auth/twitter';
 	};
 
 	this.google = function() {
+		app.disabled = true; 
 		//console.log($window.location);
 		$window.location = $window.location.protocol + '//' + $window.location.host + '/auth/google';
 	};
@@ -50,6 +53,7 @@ angular.module('mainController',['authServices'])
 		app.errorMsg = false;
 		app.successMsg = false;
 		app.expired = false;
+		app.disabled = true;
 		
 		Auth.login(app.loginData).then(function(data){
 			if(data.data.success){
@@ -71,6 +75,7 @@ angular.module('mainController',['authServices'])
 				} else {
 					//Create on error message
 					app.loading = false;
+					app.disabled = true;
 					app.errorMsg = data.data.message;
 				}
 			}

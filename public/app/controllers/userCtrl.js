@@ -102,10 +102,12 @@ angular.module('userControllers', ['userServices'])
 
 	app.checkCredentials = function(loginData){
 		app.errorMsg = false;
+		app.successMsg = false;
+
 		User.checkCredentials(app.loginData).then(function(data){
 			if(data.data.success){
 				User.resendLink(app.loginData).then(function(data){
-					console.log(data);
+					app.successMsg = data.data.message;
 				});
 			} else {
 				app.errorMsg = data.data.message;
@@ -155,6 +157,7 @@ angular.module('userControllers', ['userServices'])
 	var app = this;
 	app.errorMsg = false;
 	app.expired = false;
+	app.disabled = true; 
 
 
 	if($window.location.pathname == '/facebookerror') {
@@ -177,6 +180,7 @@ angular.module('userControllers', ['userServices'])
 	var app = this;
 	app.errorMsg = false;
 	app.expired = false;
+	app.disabled = true; 
 
 	if($window.location.pathname == '/twittererror') {
 		app.errorMsg = 'Twitter Usuario no encontrado en base de datos';
@@ -198,6 +202,7 @@ angular.module('userControllers', ['userServices'])
 	var app = this;
 	app.errorMsg = false;
 	app.expired = false;
+	app.disabled = true; 
 
 
 	if($window.location.pathname == '/googleerror') {
