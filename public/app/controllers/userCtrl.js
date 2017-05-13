@@ -78,6 +78,7 @@ angular.module('userControllers', ['userServices'])
 
 })
 //Modificar para funcionar modular
+/*
 .controller('emailCtrl', function($routeParams, User, $timeout, $location){
 		//console.log($routeParams.token);
 		app = this;
@@ -123,7 +124,7 @@ angular.module('userControllers', ['userServices'])
 	};
 })
 
-
+*/
 //hasta aqui modalizar email controller
 .directive('match', function(){
 	return {
