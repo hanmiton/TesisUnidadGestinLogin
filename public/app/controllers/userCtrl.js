@@ -152,7 +152,7 @@ angular.module('userControllers', ['userServices'])
 })
 
 .controller('passwordCtrl', function(User){
-	
+	console.log('desde passwordCtrl');
 	app = this;
 
 	app.sendPassword = function(resetData, valid) {
