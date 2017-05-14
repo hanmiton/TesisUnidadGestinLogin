@@ -150,6 +150,39 @@ angular.module('userControllers', ['userServices'])
 		}
 	};
 })
+
+.controller('passwordCtrl', function(User){
+	
+	app = this;
+
+	app.sendPassword = function(resetData, valid) {
+		app.errorMsg = false;
+		app.loading = true;
+		app.disabled = true;
+
+		if (valid) {
+			User.sendPassword(app.resetData).then(function(data) {
+				app.loading = false;
+
+				if(data.data.success) {
+					app.successMsg = data.data.message;
+				} else {
+					app.disabled = false;
+					app.errorMsg = data.data.message;
+				}
+			});
+		} else {
+			app.disabled = false;
+			app.loading = false;
+			app.errorMsg = 'Please enter a valid username';
+		}
+	};
+})
+
+.controller('resetCtrl', function(User){
+
+
+})
 //hasta aqui modalizar email controller
 .directive('match', function(){
 	return {

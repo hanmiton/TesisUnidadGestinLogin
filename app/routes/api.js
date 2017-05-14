@@ -291,6 +291,44 @@ module.exports = function(router){
 	});
 
 
+	router.put('/resetpassword', function(req, res) {
+		User.findOne( { username : req.body.username }).select('username active email resettoken name').exec(function(err, user) {
+			if(err) throw err;
+			if(!user) {
+				res.json({ success: false, message: 'Username no encontrado'});
+			} else if (!user.active) {
+				res.json({ success: false, message: 'Account no ha sido todavia activada'}); 
+			}else {
+				user.resettoken = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
+				user.save(function(err) {
+					if(err) {
+						res.json({ success: false, message: err });
+					} else {
+						var email = {
+						  from: 'Localhost Staff, staff@localhost.com',
+						  to: user.email,
+						  subject: 'unidaddegestion.club Solicitud de restablecer contraseña',
+						  text: 'Hola' + user.name + ', Usted recientemente a solicitado un restablecimiento de ocntraseña. Porfavor click en el siguiente link para restablecer la contraseña. <br><br><a href="https://www.unidaddegestion.club/reset/' + user.resettoken,
+						//local
+						//html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="http://localhost:5000/activate/' + user.temporarytoken + '">http://localhost:5000/activate/</a>'
+					 		html: '<b>Hola <strong>' + user.name + '</strong>,<br><br> Usted recientemente a solicitado un restablecimiento de ocntraseña. Porfavor click en el siguiente link para restablecer la contraseña :<br><br><a href="https://www.unidaddegestion.club/reset/' + user.resettoken + '">https://www.unidaddegestion.club/reset/</a>'
+						};
+
+					client.sendMail(email, function(err, info){
+					    if (err ){
+					      console.log(error);
+					    }
+					    else {
+					      console.log('Mensaje enviado ' + info.response);
+					    }	
+						});	
+						res.json({ success: true, message : 'Porfavor chequea tu e-mail por el link de restablecer contraseña'});
+					}
+				});
+
+			}
+		});
+	});
 
 
 
