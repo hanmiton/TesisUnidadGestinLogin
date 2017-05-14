@@ -253,6 +253,43 @@ module.exports = function(router){
 		})
 	});
 
+
+	router.get('/resetusername/:email', function(req,res) {
+		User.findOne({ email: req.params.email }).select('email name username').exec(function(err, user){
+			if (err) {
+				res.json ({ success : false , message: err });
+			} else {
+				if(!user) {
+					res.json({ success : false, message: 'E-mail no encontrado'});
+				} else {
+					var email = {
+					  from: 'Localhost Staff, staff@localhost.com',
+					  to: user.email,
+					  subject: 'unidaddegestion.club Peticion Username',
+					  text: 'Hola' + user.name + ', Tu recientemente solicitaste tu username. Porfavor graba este en tus archivos.' + user.username,
+					//local
+					//html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="http://localhost:5000/activate/' + user.temporarytoken + '">http://localhost:5000/activate/</a>'
+					html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Tu recientemente solicitaste tu username. Porfavor graba este en tus archivos.' + user.username
+					};
+
+					client.sendMail(email, function(err, info){
+					    if (err ){
+					      console.log(error);
+					    }
+					    else {
+					      console.log('Mensaje enviado ' + info.response);
+					    }	
+					});
+					res.json({ success: true, message : 'Username ha sido enviado a tu e-mail'});
+				}
+			}
+		});
+	});
+
+
+
+
+
 	router.use(function(req, res, next) {
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
 

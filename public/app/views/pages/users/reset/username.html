@@ -2,11 +2,11 @@
 	<h1>Olvido su Username</h1>
 </div>
 
-<form ng-submit="username.doLogin(loginData);">
+<form ng-submit="username.sendUsername(userData);">
 	
 	<!--Username -->
-	<label>Username</label>
-	<input ng-disabled= "username.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "form-control"  type="text" name="username" placeholder="Nombre Usuario" ng-model="username.loginData.username">
+	<label>E-mail:</label>
+	<input ng-disabled= "username.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "form-control"  type="text" name="email" placeholder="Nombre Usuario" ng-model="username.userData.email">
 	<br>
 
 	<button ng-disabled= "username.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "btn btn-primary" type="submit">Enviar</button>

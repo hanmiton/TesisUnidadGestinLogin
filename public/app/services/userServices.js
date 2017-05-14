@@ -32,6 +32,10 @@ angular.module('userServices', [])
 		userFactory.resendLink = function(username){
 			return $http.put('/api/resend', username);
 		}
+
+		userFactory.sendUsername = function(userData) {
+			return $http.get('/api/resetusername/' + userData);
+		}
 		
 		return userFactory;
 });

@@ -123,7 +123,16 @@ angular.module('userControllers', ['userServices'])
 	};
 })
 
-.controller('usernameCtrl', function(){
+.controller('usernameCtrl', function(User){
+	
+	app = this;
+
+	app.sendUsername = function(userData) {
+		User.sendUsername(app.userData.email).then(function(data) {
+			console.log(data);
+		});
+	};
+
 	
 })
 //hasta aqui modalizar email controller
