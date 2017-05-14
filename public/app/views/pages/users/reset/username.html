@@ -1,0 +1,31 @@
+<div class="page-header">
+	<h1>Olvido su Username</h1>
+</div>
+
+<form ng-submit="username.doLogin(loginData);">
+	
+	<!--Username -->
+	<label>Username</label>
+	<input ng-disabled= "username.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "form-control"  type="text" name="username" placeholder="Nombre Usuario" ng-model="username.loginData.username">
+	<br>
+
+	<button ng-disabled= "username.disabled || facebook.disabled || twitter.disabled || google.disabled" class= "btn btn-primary" type="submit">Enviar</button>
+
+</form>
+
+<br>
+
+<div class="jummbotron text-center" ng-show="username.loading">
+	<span class="glyphicon-repeat spinner glyphicon"></span>
+	<p>Cargando...</p>
+</div>
+
+<div class="show-hide-message row" ng-show="username.successMsg">
+	<div class="alert-success alert"> {{username.successMsg}}</div>
+</div>
+
+<br>
+
+<div class="show-hide-message row" ng-show="username.errorMsg">
+	<div class="alert-danger alert"> {{username.errorMsg}}</div>
+</div> 

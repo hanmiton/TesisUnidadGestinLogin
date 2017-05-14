@@ -106,6 +106,13 @@ var app = angular.module('appRoutes', ['ngRoute'])
 		controllerAs: 'resend'
 	})
 
+	.when('/resetusername', {
+		templateUrl: 'app/views/pages/users/reset/username.html',
+		controller: 'usernameCtrl',
+		controllerAs : 'username',
+		authenticated : false
+	})
+
 	.otherwise( {redirectTo: '/'});
 
 	$locationProvider.html5Mode({
