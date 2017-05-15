@@ -330,6 +330,20 @@ module.exports = function(router){
 		});
 	});
 
+	router.get('/resetpassword/:token', function(req, res) {
+		User.findOne({ resettoken : req.params.token }).select().exec(function(err, user) {
+			if (err) throw err;
+			var token = req.params.token;
+			//funcion par averifaicacion del token 
+			jwt.verify(token, secret, function(err, decoded){
+				if(err){
+					res.json({ success: false, message: 'Enlace contraseña ha expirado'});
+				} else {
+					res.json({ success: true, user: user});
+				}
+			});
+		});
+	});
 
 
 	router.use(function(req, res, next) {

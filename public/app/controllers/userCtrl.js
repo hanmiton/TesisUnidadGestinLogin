@@ -179,8 +179,11 @@ angular.module('userControllers', ['userServices'])
 	};
 })
 
-.controller('resetCtrl', function(User){
+.controller('resetCtrl', function(User, $routeParams){
 
+	User.resetUser($routeParams.token).then(function(data){
+		console.log(data);
+	});
 
 })
 //hasta aqui modalizar email controller

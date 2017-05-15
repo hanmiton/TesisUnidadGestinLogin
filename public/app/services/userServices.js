@@ -40,6 +40,10 @@ angular.module('userServices', [])
 		userFactory.sendPassword = function(resetData) {
 			return $http.put('/api/resetpassword', resetData);
 		}; 
+
+		userFactory.resetUser = function(token) {
+			return $http.get('/api/resetpassword/' + token);
+		}
 		
 		return userFactory;
 });
