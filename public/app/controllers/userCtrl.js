@@ -186,6 +186,7 @@ angular.module('userControllers', ['userServices'])
 	});
 
 })
+
 //hasta aqui modalizar email controller
 .directive('match', function(){
 	return {
