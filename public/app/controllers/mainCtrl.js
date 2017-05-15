@@ -1,12 +1,25 @@
 angular.module('mainController',['authServices'])
 
-.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window){
+.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval ){
 	//console.log('hanmilton')
 	var app = this;
  	
  	app.loadme = false;
 
+ 	app.checkSession = function() {
+ 		if(Auth.isLoggedIn()) {
+ 			app.checkingSession = true;
+ 			var interval = $interval(function(){
+ 				console.log('test');
+ 			} , 2000);
+ 		}
+ 	};
+
+ 	app.checkSession();
+
 	$rootScope.$on('$routeChangeStart', function() {
+		if(!app.checkSession) app.checkSession();
+
 		if (Auth.isLoggedIn()) {
 			console.log('Success: User is logged in.');
 			app.isLoggedIn = true;
@@ -64,6 +77,7 @@ angular.module('mainController',['authServices'])
 					$location.path('/about');
 					app.loginData= '';
 					app.successMsg = false;
+					app.checkSession();
 				},2000);
 
 			}else{
