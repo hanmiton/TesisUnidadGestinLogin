@@ -181,6 +181,9 @@ angular.module('userControllers', ['userServices'])
 
 .controller('resetCtrl', function(User, $routeParams){
 
+	app = this;
+	app.hide = true;
+
 	User.resetUser($routeParams.token).then(function(data){
 		console.log(data);
 	});
