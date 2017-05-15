@@ -198,19 +198,25 @@ angular.module('userControllers', ['userServices'])
 	app.savePassword = function(regData, valid, confirmed) {
 		app.errorMsg = false;
 		app.disabled = true;
-		app.loading = true;
-		app.regData.username = $scope.username;
-
+		app.loading = false;
+		
 		if( valid && confirmed ) {
+			app.regData.username = $scope.username;
 			User.savePassword(app.regData).then(function(data) {
 				app.loading = false;
 				if(data.data.success) {
-					app.successMsg = data.data.message;
+					app.successMsg = data.data.message + '...Redirigiendo';
+					$timeout(function() {
+						$location.path('/login');
+					}, 2000);
 				} else{
+					app.loading = false;
+					app.disabled = false;
 					app.errorMsg = data.data.message;
 				}
 			});
 		} else {
+			app.loading = false;
 			app.disabled = false;
 			app.errorMsg = 'Porfavor asegurece de llenar correctamente el formulario';
 		}
