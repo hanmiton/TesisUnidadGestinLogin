@@ -199,6 +199,7 @@ angular.module('userControllers', ['userServices'])
 		app.errorMsg = false;
 		app.disabled = true;
 		app.loading = true;
+		app.regData.username = $scope.username;
 
 		if( valid && confirmed ) {
 			User.savePassword(app.regData).then(function(data) {
