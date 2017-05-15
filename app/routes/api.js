@@ -384,7 +384,7 @@ module.exports = function(router){
 					      console.log('Mensaje enviado ' + info.response);
 					    }	
 						});	
-						res.json ( {sucess: true, message: 'Contraseña ha sido restablecida'});
+						res.json ( {success: true, message: 'Contraseña ha sido restablecida'});
 					}
 				});
 
