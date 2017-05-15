@@ -204,7 +204,7 @@ angular.module('userControllers', ['userServices'])
 			app.regData.username = $scope.username;
 			User.savePassword(app.regData).then(function(data) {
 				app.loading = false;
-				console.log(data.data.success);
+				console.log(data.data);
 				if(data.data.success) {
 					app.successMsg = data.data.message + '...Redirigiendo';
 					$timeout(function() {
