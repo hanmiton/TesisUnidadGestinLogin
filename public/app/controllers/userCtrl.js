@@ -179,7 +179,7 @@ angular.module('userControllers', ['userServices'])
 	};
 })
 
-.controller('resetCtrl', function(User, $routeParams){
+.controller('resetCtrl', function(User, $routeParams, $scope){
 
 	app = this;
 	app.hide = true;
@@ -188,10 +188,32 @@ angular.module('userControllers', ['userServices'])
 		if(data.data.success) {
 			app.hide = false;
 			app.successMsg = 'Please enter a new password';
+			$scope.username = data.data.user.username;
+			console.log($scope.username);
 		} else {
 			app.errorMsg = data.data.message;
 		}
 	});
+
+	app.savePassword = function(regData, valid, confirmed) {
+		app.errorMsg = false;
+		app.disabled = true;
+		app.loading = true;
+
+		if( valid && confirmed ) {
+			User.savePassword(app.regData).then(function(data) {
+				app.loading = false;
+				if(data.data.success) {
+					app.successMsg = data.data.message;
+				} else{
+					app.errorMsg = data.data.message;
+				}
+			});
+		} else {
+			app.disabled = false;
+			app.errorMsg = 'Porfavor asegure de llenar correctamente el formulario';
+		}
+	}
 
 })
 

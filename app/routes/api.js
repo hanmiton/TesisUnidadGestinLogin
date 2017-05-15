@@ -345,6 +345,48 @@ module.exports = function(router){
 		});
 	});
 
+	router.put('/savepassword', function(req, res) {
+		User.findOne({username: req.body.username }).select('username email name password resettoken').exec(function(err, user) {
+			if(err) throw err;
+			if(req.body.password == null || req.body.password == "" ) {
+
+				res.json ({ success : false , message : 'Contraseña no proveida'})	
+				
+			} else {
+			
+				user.password = req.body.password;
+				user.resettoken = false;
+				user.save(function(err) {
+					if (err) {
+						res.json( {success : false , message: err});
+					} else {
+
+						var email = {
+						  from: 'Localhost Staff, staff@localhost.com',
+						  to: user.email,
+						  subject: 'unidaddegestion.club Rstablecer contraseña',
+						  text: 'Hola' + user.name + ', Este correo es para notificar que tu contraseña fue recientemente restablecida unidaddegestion.club',
+						//local
+						//html: '<b>Hello <strong>' + user.name + '</strong>,<br><br> Gracias por registrarte en unidaddegestion.club. Porfavor da click de abajo para completar la activación:<br><br><a href="http://localhost:5000/activate/' + user.temporarytoken + '">http://localhost:5000/activate/</a>'
+					 		html: '<b>Hola <strong>' + user.name + '</strong>,<br><br> Este correo es para notificar que tu contraseña fue recientemente restablecida unidaddegestion.club'
+						};
+
+					client.sendMail(email, function(err, info){
+					    if (err ){
+					      console.log(error);
+					    }
+					    else {
+					      console.log('Mensaje enviado ' + info.response);
+					    }	
+						});	
+						res.json ( {sucess: true, message: 'Contraseña ha sido restablecida'});
+					}
+				});
+
+			}
+		});
+	});
+
 
 	router.use(function(req, res, next) {
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
