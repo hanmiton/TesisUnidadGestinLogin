@@ -193,7 +193,7 @@ angular.module('userControllers', ['userServices'])
 		} else {
 			app.errorMsg = data.data.message;
 		}
-	});
+	}); 
 
 	app.savePassword = function(regData, valid, confirmed) {
 		app.errorMsg = false;
@@ -212,7 +212,7 @@ angular.module('userControllers', ['userServices'])
 			});
 		} else {
 			app.disabled = false;
-			app.errorMsg = 'Porfavor asegure de llenar correctamente el formulario';
+			app.errorMsg = 'Porfavor asegurece de llenar correctamente el formulario';
 		}
 	}
 

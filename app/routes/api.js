@@ -340,7 +340,7 @@ module.exports = function(router){
 					res.json({ success: false, message: 'Enlace contraseña ha expirado'});
 				} else {
 					if(!user) {
-						res.json({ success: false, user: 'Enlace de restablecer contraseña a expirado'}); 	
+						res.json({ success: false, user: 'Enlace de restablecer contraseña ha expirado'}); 	
 					} else {
 						res.json({ success: true, user: user});
 					}
