@@ -185,7 +185,12 @@ angular.module('userControllers', ['userServices'])
 	app.hide = true;
 
 	User.resetUser($routeParams.token).then(function(data){
-		console.log(data);
+		if(data.data.success) {
+			app.hide = false;
+			app.successMsg = 'Please enter a new password';
+		} else {
+			app.errorMsg = data.data.message;
+		}
 	});
 
 })
