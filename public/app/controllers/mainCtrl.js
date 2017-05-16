@@ -10,7 +10,19 @@ angular.module('mainController',['authServices'])
  		if(Auth.isLoggedIn()) {
  			app.checkingSession = true;
  			var interval = $interval(function(){
- 				console.log('test');
+ 				var token = $window.localStorage.getItem('token');
+ 				if(token === null ) {
+ 					$interval.cancel(interval);
+ 				} else {
+ 					self.parseJwt = function(token) {
+ 						var base64Url = token.split('.')[1];
+ 						var base64 = base64Url.replace('-', '+').replace('_', '/');
+ 						return JSON.parse($window.atob(base64));
+ 					}
+
+ 					var expireTime = self.parseJwt(token);
+ 					console.log(expireTime.exp);
+ 				}
  			} , 2000);
  		}
  	};
