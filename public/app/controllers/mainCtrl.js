@@ -40,12 +40,21 @@ angular.module('mainController',['authServices'])
 
  	app.checkSession();
 
+
  	var showModal = function() {
  		app.modalHeader = 'Advertencia de tiempo de espera';
  		app.modalBody = 'Su sesion expirara en 5 min, ¿Quiere renovar la sesions?'
 
  		$("#myModal").modal({backdrop : "static"});
- 	}
+ 	};
+
+ 	app.renewSession = function() {
+ 		console.log('session ha sido renovada');
+ 	};
+
+ 	app.endSession = function() {
+ 		console.log('session ha terminado');
+ 	};
 
 	$rootScope.$on('$routeChangeStart', function() {
 		if(!app.checkSession) app.checkSession();
