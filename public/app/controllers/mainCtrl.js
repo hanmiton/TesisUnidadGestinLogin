@@ -28,6 +28,7 @@ angular.module('mainController',['authServices'])
  					console.log('timeCheck : ' + timeCheck);
  					if(timeCheck <= 0) {
  						console.log('token ha expirado');
+ 						showModal();
  						$interval.cancel(interval);
  					} else {
  						console.log('token todavia no ha expirado');
@@ -38,6 +39,13 @@ angular.module('mainController',['authServices'])
  	};
 
  	app.checkSession();
+
+ 	var showModal = function() {
+ 		app.modalHeader = 'Advertencia de tiempo de espera';
+ 		app.modalBody = 'Su sesion expirara en 5 min, ¿Quiere renovar la sesions?'
+
+ 		$("#myModal").modal({backdrop : "static"});
+ 	}
 
 	$rootScope.$on('$routeChangeStart', function() {
 		if(!app.checkSession) app.checkSession();
