@@ -49,6 +49,7 @@ angular.module('mainController',['authServices'])
  		$timeout(function(){
  			if(!app.choiceMade) {
  				console.log('LOGGED OUT!!!');
+ 				hideModal();
  			}
  		}, 4000);
  	};
@@ -61,6 +62,10 @@ angular.module('mainController',['authServices'])
  	app.endSession = function() {
  		app.choiceMade = true;
  		console.log('session ha terminado');
+ 	};
+
+ 	var hideModal = function () {
+ 		$("#myModal").modal('hide');
  	};
 
 	$rootScope.$on('$routeChangeStart', function() {
