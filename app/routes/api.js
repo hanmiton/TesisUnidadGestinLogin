@@ -134,7 +134,7 @@ module.exports = function(router){
 						res.json({success: false, message: 'Cuenta todavia no activada, Por favor rebiza tu e-mail por el link de ativacion', expired: true});
 					}
 					else {
-					var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '5s'});
+					var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '10s'});
 					res.json({success: true, message: 'User autenticado!', token: token});
 				}
 				} else {
