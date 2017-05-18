@@ -28,6 +28,7 @@ angular.module('mainController',['authServices'])
  					console.log('timeCheck : ' + timeCheck);
  					if(timeCheck <= 0) {
  						console.log('token ha expirado');
+ 						$interval.cancel(interval);
  					} else {
  						console.log('token todavia no ha expirado');
  					}
