@@ -42,17 +42,24 @@ angular.module('mainController',['authServices'])
 
 
  	var showModal = function() {
+ 		app.choiceMade = false;
  		app.modalHeader = 'Advertencia de tiempo de espera';
  		app.modalBody = 'Su sesion expirara en 5 min, ¿Quiere renovar la sesions?'
-
  		$("#myModal").modal({backdrop : "static"});
+ 		$timeout(function(){
+ 			if(!app.choiceMade) {
+ 				console.log('LOGGED OUT!!!');
+ 			}
+ 		}, 4000);
  	};
 
  	app.renewSession = function() {
+ 		app.choiceMade = true;
  		console.log('session ha sido renovada');
  	};
 
  	app.endSession = function() {
+ 		app.choiceMade = true;
  		console.log('session ha terminado');
  	};
 
