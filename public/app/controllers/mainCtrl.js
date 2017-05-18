@@ -26,6 +26,11 @@ angular.module('mainController',['authServices'])
  					console.log(timeStamp); 
  					var timeCheck = expireTime.exp - timeStamp;
  					console.log('timeCheck : ' + timeCheck);
+ 					if(timeCheck <= 0) {
+ 						console.log('token ha expirado');
+ 					} else {
+ 						console.log('token todavia no ha expirado');
+ 					}
  				}
  			} , 2000);
  		}
