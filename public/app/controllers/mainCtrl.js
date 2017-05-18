@@ -21,7 +21,9 @@ angular.module('mainController',['authServices'])
  					}
 
  					var expireTime = self.parseJwt(token);
+ 					var timeStamp = Math.floor(Date.now() / 1000);
  					console.log(expireTime.exp);
+ 					console.log(timeStamp);
  				}
  			} , 2000);
  		}
