@@ -91,8 +91,10 @@ angular.module('mainController',['authServices', 'userServices'])
 
  	app.endSession = function() {
  		app.choiceMade = true;
- 		console.log('session ha terminado');
  		hideModal();
+ 		$timeout(function(){
+ 			showModal(2);
+ 		}, 1000);
  	};
 
  	var hideModal = function () {
