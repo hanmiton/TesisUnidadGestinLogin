@@ -25,6 +25,7 @@ body {
   height: 0.1px;
   border: 40px solid transparent;
   border-radius: 5px;
+  margin : auto;
   -webkit-animation: loader 3s ease-in infinite, spin 1s linear infinite;
           animation: loader 3s ease-in infinite, spin 1s linear infinite;
 }
