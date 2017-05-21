@@ -416,7 +416,7 @@ module.exports = function(router){
 	});
 
 	router.get('/renewToken/:username', function(req, res){
-		User.findOne({ username: req.paramas.username }).select().exec(function(err, user){
+		User.findOne({ username: req.params.username }).select().exec(function(err, user){
 			if(err) throw err;
 			if(!user) {
 				res.json({ success: false, message : 'Usuario no encontrado'});
