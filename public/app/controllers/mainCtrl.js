@@ -1,6 +1,6 @@
 angular.module('mainController',['authServices', 'userServices'])
 
-.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval, $route, User){
+.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval, $route, User, AuthToken){
 	//console.log('hanmilton')
 	var app = this;
  	
