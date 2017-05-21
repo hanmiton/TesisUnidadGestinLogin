@@ -28,7 +28,7 @@ angular.module('mainController',['authServices'])
  					console.log('timeCheck : ' + timeCheck);
  					if(timeCheck <= 0) {
  						console.log('token ha expirado');
- 						showModal();
+ 						showModal(1);
  						$interval.cancel(interval);
  					} else {
  						console.log('token todavia no ha expirado');
@@ -41,27 +41,36 @@ angular.module('mainController',['authServices'])
  	app.checkSession();
 
 
- 	var showModal = function() {
+ 	var showModal = function(option) {
  		app.choiceMade = false;
- 		app.modalHeader = 'Advertencia de tiempo de espera';
- 		app.modalBody = 'Su sesion expirara en 5 min, ¿Quiere renovar la sesions?'
- 		$("#myModal").modal({backdrop : "static"});
- 		$timeout(function(){
- 			if(!app.choiceMade) {
- 				console.log('LOGGED OUT!!!');
- 				hideModal();
- 			}
- 		}, 4000);
+ 		app.modalHeader = false;
+ 		app.modalBody = false;
+
+ 		if(option == 1) {
+ 			app.modalHeader = 'Advertencia de tiempo de espera';
+	 		app.modalBody = 'Su sesion expirara en 5 min, ¿Quiere renovar la sesions?'
+	 		$("#myModal").modal({backdrop : "static"});
+	 		$timeout(function(){
+	 			if(!app.choiceMade) {
+	 				console.log('LOGGED OUT!!!');
+	 				hideModal();
+	 			}
+	 		}, 4000);	
+ 		} else if ( option == 2) {
+
+ 		}		
  	};
 
  	app.renewSession = function() {
  		app.choiceMade = true;
  		console.log('session ha sido renovada');
+ 		hideModal();
  	};
 
  	app.endSession = function() {
  		app.choiceMade = true;
  		console.log('session ha terminado');
+ 		hideModal();
  	};
 
  	var hideModal = function () {
