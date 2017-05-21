@@ -43,22 +43,24 @@ angular.module('mainController',['authServices'])
 
  	var showModal = function(option) {
  		app.choiceMade = false;
- 		app.modalHeader = false;
- 		app.modalBody = false;
+ 		app.modalHeader = undefined;
+ 		app.modalBody = undefined;
 
  		if(option == 1) {
  			app.modalHeader = 'Advertencia de tiempo de espera';
 	 		app.modalBody = 'Su sesion expirara en 5 min, ¿Quiere renovar la sesions?'
 	 		$("#myModal").modal({backdrop : "static"});
-	 		$timeout(function(){
+	 			
+ 		} else if ( option == 2) {
+ 			app.modalHeader = 'Sesion Finalizada';
+ 			$("#myModal").modal({backdrop : "static"});
+ 		}	
+ 		$timeout(function(){
 	 			if(!app.choiceMade) {
-	 				console.log('LOGGED OUT!!!');
+	 				console.log('SESION Finalizada!!!');
 	 				hideModal();
 	 			}
 	 		}, 4000);	
- 		} else if ( option == 2) {
-
- 		}		
  	};
 
  	app.renewSession = function() {
@@ -159,12 +161,8 @@ angular.module('mainController',['authServices'])
 		});
 	};
 
-	this.logout = function() {
-		Auth.logout();
-		$location.path('/logout');
-		$timeout(function(){
-			$location.path('/');
-		}, 2000);
+	app.logout = function() {
+		showModal(2);
 	};
 });
 	
