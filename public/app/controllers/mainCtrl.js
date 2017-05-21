@@ -1,6 +1,6 @@
-angular.module('mainController',['authServices'])
+angular.module('mainController',['authServices', 'userServices'])
 
-.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval, $route){
+.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval, $route, User){
 	//console.log('hanmilton')
 	var app = this;
  	
@@ -26,7 +26,7 @@ angular.module('mainController',['authServices'])
  					console.log(timeStamp); 
  					var timeCheck = expireTime.exp - timeStamp;
  					console.log('timeCheck : ' + timeCheck);
- 					if(timeCheck <= 0) {
+ 					if(timeCheck <= 25) {
  						console.log('token ha expirado');
  						showModal(1);
  						$interval.cancel(interval);
@@ -65,7 +65,6 @@ angular.module('mainController',['authServices'])
  		}	
  		$timeout(function(){
  			if(!app.choiceMade) {
- 				console.log('SESION Finalizada!!!');
  				hideModal();
  			}
  		}, 4000);	
@@ -73,6 +72,19 @@ angular.module('mainController',['authServices'])
 
  	app.renewSession = function() {
  		app.choiceMade = true;
+ 		User.renewSession(app.username).then(function(data) {
+ 			if(data.data.success) {
+ 				AuthToken.setToken(data.data.token);
+ 				app.checkSession();
+ 			} else {
+ 				app.modalBody = data.data.message;
+ 			}
+ 		});
+
+
+
+
+
  		console.log('session ha sido renovada');
  		hideModal();
  	};

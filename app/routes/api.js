@@ -134,7 +134,7 @@ module.exports = function(router){
 						res.json({success: false, message: 'Cuenta todavia no activada, Por favor rebiza tu e-mail por el link de ativacion', expired: true});
 					}
 					else {
-					var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '1h'});
+					var token = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '30s'});
 					res.json({success: true, message: 'User autenticado!', token: token});
 				}
 				} else {
@@ -408,9 +408,24 @@ module.exports = function(router){
 		} else {
 			res.json({ success: false, message : 'No token provided'});
 		}
-	})
+	});
+
+	// Route to get the currently logged in user
 	router.post('/me', function(req,res){
 		res.send(req.decoded);
+	});
+
+	router.get('/renewToken/:username', function(req, res){
+		User.findOne({ username: req.paramas.username }).select().exec(function(err, user){
+			if(err) throw err;
+			if(!user) {
+				res.json({ success: false, message : 'Usuario no encontrado'});
+			} else {
+				var newtoken = jwt.sign({ username: user.username, email: user.email}, secret, {expiresIn: '24h'});
+				res.json({success: true, token: newtoken});
+				
+			}
+		});
 	});
 
 	return router;
