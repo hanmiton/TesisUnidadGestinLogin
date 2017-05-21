@@ -98,8 +98,8 @@
                   <p>{{main.modalBody}}</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" ng-click= "main.renewSession();" class="btn btn-primary" data-dismiss="modal">Si</button>
-                  <button type="button" ng-click= "main.endSession();" class="btn btn-danger" data-dismiss="modal">No</button>
+                  <button type="button" ng-hide="main.hideButton" ng-click= "main.renewSession();" class="btn btn-primary" data-dismiss="modal">Si</button>
+                  <button type="button" ng-hide="main.hideButton" ng-click= "main.endSession();" class="btn btn-danger" data-dismiss="modal">No</button>
                 </div>
               </div>
               

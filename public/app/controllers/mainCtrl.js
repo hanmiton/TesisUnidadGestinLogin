@@ -45,6 +45,7 @@ angular.module('mainController',['authServices'])
  		app.choiceMade = false;
  		app.modalHeader = undefined;
  		app.modalBody = undefined;
+ 		app.hideButton = false;
 
  		if(option == 1) {
  			app.modalHeader = 'Advertencia de tiempo de espera';
@@ -52,15 +53,16 @@ angular.module('mainController',['authServices'])
 	 		$("#myModal").modal({backdrop : "static"});
 	 			
  		} else if ( option == 2) {
+ 			app.hideButton = true;
  			app.modalHeader = 'Sesion Finalizada';
  			$("#myModal").modal({backdrop : "static"});
  		}	
  		$timeout(function(){
-	 			if(!app.choiceMade) {
-	 				console.log('SESION Finalizada!!!');
-	 				hideModal();
-	 			}
-	 		}, 4000);	
+ 			if(!app.choiceMade) {
+ 				console.log('SESION Finalizada!!!');
+ 				hideModal();
+ 			}
+ 		}, 4000);	
  	};
 
  	app.renewSession = function() {
