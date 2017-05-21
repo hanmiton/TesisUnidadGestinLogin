@@ -1,6 +1,6 @@
 angular.module('mainController',['authServices'])
 
-.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval ){
+.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval, $route){
 	//console.log('hanmilton')
 	var app = this;
  	
@@ -56,6 +56,12 @@ angular.module('mainController',['authServices'])
  			app.hideButton = true;
  			app.modalHeader = 'Sesion Finalizada';
  			$("#myModal").modal({backdrop : "static"});
+ 			$timeout(function(){
+ 				Auth.logout();
+ 				$location.path('/');
+ 				hideModal();
+ 				$route.reload();
+ 			}, 2000);
  		}	
  		$timeout(function(){
  			if(!app.choiceMade) {
