@@ -129,6 +129,12 @@ var app = angular.module('appRoutes', ['ngRoute'])
 		authenticated : false
 	})
 
+	.when('/management', {
+		templateUrl : 'app/views/pages/management/management.html',
+		controller: 'managementCtrl',
+		controllerAs: 'management'
+	})
+	
 	.otherwise( {redirectTo: '/'});
 
 	$locationProvider.html5Mode({
