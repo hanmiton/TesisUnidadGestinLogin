@@ -53,5 +53,8 @@ angular.module('userServices', [])
 			return $http.get('/api/renewToken/' + username);
 		}
 
+		userFactory.getPermission = function() {
+			return $http.get('/api/permission');
+		}
 		return userFactory;
 });

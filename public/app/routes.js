@@ -132,7 +132,9 @@ var app = angular.module('appRoutes', ['ngRoute'])
 	.when('/management', {
 		templateUrl : 'app/views/pages/management/management.html',
 		controller: 'managementCtrl',
-		controllerAs: 'management'
+		controllerAs: 'management',
+		authenticated : true,
+		permission : ['admin', 'moderator']
 	})
 	
 	.otherwise( {redirectTo: '/'});
@@ -144,7 +146,7 @@ var app = angular.module('appRoutes', ['ngRoute'])
 
 }); 
 
-app.run(['$rootScope', 'Auth' , '$location' , function($rootScope, Auth, $location) {
+app.run(['$rootScope', 'Auth' , '$location' , 'User',  function($rootScope, Auth, $location, User) {
 
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
 		
@@ -154,6 +156,12 @@ app.run(['$rootScope', 'Auth' , '$location' , function($rootScope, Auth, $locati
 			if (!Auth.isLoggedIn()) {
 				event.preventDefault();
 				$location.path('/');
+			} else if (next.$$route.permission) {
+
+				User.getPermission().then(function(data){
+					console.log(data);
+				});
+
 			}
 		}else if( next.$$route.authenticated == false) {
 			//console.log('should not be authenticated');

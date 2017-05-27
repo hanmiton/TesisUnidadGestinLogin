@@ -428,5 +428,16 @@ module.exports = function(router){
 		});
 	});
 
+	router.get('/permission', function(req , res) {
+		User.findOne({ username: req.decoded.username }, function(err, user) {
+			if (err) throw err;
+			if (!user) {
+				res.json({ success: false, message: 'Usuario no encontrado'});
+			} else {
+				res.json({ success: true, permission: user.permission });
+			}
+		});
+	});
+
 	return router;
 }
