@@ -159,7 +159,12 @@ app.run(['$rootScope', 'Auth' , '$location' , 'User',  function($rootScope, Auth
 			} else if (next.$$route.permission) {
 
 				User.getPermission().then(function(data){
-					console.log(data);
+					if(next.$$route.permission[0] !== data.data.permission){
+						if(next.$$route.permission[1] !== data.data.permission){
+							event.preventDefault();
+							$location.path('/');
+						}
+					}
 				});
 
 			}
