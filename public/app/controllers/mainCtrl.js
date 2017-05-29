@@ -94,7 +94,7 @@ angular.module('mainController',['authServices', 'userServices'])
  		hideModal();
  		$timeout(function(){
  			showModal(2);
- 		}, 1000);
+ 		}, 1000);  
  	};
 
  	var hideModal = function () {
@@ -109,11 +109,19 @@ angular.module('mainController',['authServices', 'userServices'])
 			app.isLoggedIn = true;
 			
 			Auth.getUser().then(function(data) {
-				console.log(data.data.username);
-				console.log(data.data);
+				//console.log(data.data.username);
+				//console.log(data.data);
 				app.username = data.data.username;
 				app.useremail = data.data.email;
-				app.loadme = true;
+
+				User.getPermission().then(function(data) {
+					if(data.data.permission === 'admin' || data.data.permission === 'moderator') {
+						app.authorized = true;
+						app.loadme = true;
+					} else {
+						app.loadme = true;
+					}
+				});
 			});
 		}else {
 			console.log('Failure: User is NOT logged in.');
