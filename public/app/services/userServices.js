@@ -54,7 +54,12 @@ angular.module('userServices', [])
 		}
 
 		userFactory.getPermission = function() {
-			return $http.get('/api/permission');
+			return $http.get('/api/permission/');
 		}
+
+		userFactory.getUsers = function() {
+			return $http.get('/api/management/');
+		}
+
 		return userFactory;
 });

@@ -439,5 +439,27 @@ module.exports = function(router){
 		});
 	});
 
+	router.get('/management', function(req, res){
+		User.find({}, function(err, users){
+			if(err) throw err;
+			User.findOne({ username: req.decoded.username } , function( err, mainUser) {
+				if(err) throw err;
+				if(!mainUser) {
+					res.json({ success: false, message: 'Usuario no encontrado'});
+				} else {
+					if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
+						if (!users) {
+							res.json ({ success : false , message: 'Usuarios no encontrados'})
+						} else {
+							res.json ({ success : true, users: users, permission : mainUser.permission});
+						}
+					} else {
+						res.json({success : false, message : 'Permisos insuficientes'})
+					}
+				}
+			});
+		});
+	});
+
 	return router;
 }
