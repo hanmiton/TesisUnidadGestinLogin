@@ -9,7 +9,7 @@ angular.module('managementController', [])
 
 	User.getUsers().then(function(data) {
 		if (data.data.success) {
-			if (data.data.permission === 'admin' || data.data.permission === 'moderador') {
+			if (data.data.permission === 'admin' || data.data.permission === 'moderator') {
 				app.users = data.data.users;
 				app.loading = false;
 				app.accessDenied = false;
