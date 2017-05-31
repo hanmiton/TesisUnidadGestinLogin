@@ -9,11 +9,19 @@
 	<p>Cargando...</p>
 </div>
 
-<div class="show-hide-message row" ng-show="main.successMsg">
-	<div class="alert-success alert"> {{main.successMsg}}</div>
+<br>
+
+<button type="button" class= "btn btn-success">Aplicar Filtro</button>
+<button type="button" class= "btn btn-warning">Mostrar Total</button>
+<div class="showmore">
+	<div class="col-lg-6">
+		<div class="input-group">
+			<span class="input-group-addon"> Despliegue Resultado:</span>
+			<input type="text" name="form-control" ng-model="number">
+		</div>
+	</div>
 </div>
 
-<br>
 
 <div class="panel-primary panel">
 	<div class="panel-heading">
