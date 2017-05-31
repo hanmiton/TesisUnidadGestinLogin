@@ -31,4 +31,19 @@ angular.module('managementController', [])
 			app.loading = false;
 		}
 	});
+
+	app.showMore = function(number) {
+		if (number > 0 ) {
+			app.limit = number;
+		} else {
+			app.showMoreError = 'Porfavor ingres un numero valido';
+		}
+	};
+
+	app.showAll = function() {
+
+	};
+
+
+
 });
