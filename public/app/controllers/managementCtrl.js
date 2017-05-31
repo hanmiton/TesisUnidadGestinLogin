@@ -33,6 +33,8 @@ angular.module('managementController', [])
 	});
 
 	app.showMore = function(number) {
+		app.showMoreError = false;
+		
 		if (number > 0 ) {
 			app.limit = number;
 		} else {

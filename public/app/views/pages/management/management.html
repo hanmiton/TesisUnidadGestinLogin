@@ -25,6 +25,15 @@
 <br>
 <br>
 
+<!--custom error message -->
+<div class="show-hide-message row" ng-show="management.showMoreError">
+	<div class="alert-danger alert"> {{management.showMoreError}}
+</div>
+</div> 
+
+<br>
+<br>
+
 <div class="panel-primary panel">
 	<div class="panel-heading">
 		<strong> Administración de Usuarios</strong>
@@ -50,7 +59,10 @@
 		</tr>
 	</table>
 </div>
-<div class="show-hide-message row" ng-show="main.errorMsg">
-	<div class="alert-danger alert"> {{main.errorMsg}}&nbsp<a ng-show="main.expired" href="/resend"><button type="button" class="btn btn-success">Reenviar enlace de activación </button> </a>
+
+<div class="show-hide-message row" ng-show="management.successMsg">
+	<div class="alert-success alert"> {{management.successMsg}}
 </div>
 </div> 
+
+
