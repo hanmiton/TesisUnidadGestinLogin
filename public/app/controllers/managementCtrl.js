@@ -63,6 +63,27 @@ angular.module('managementController', [])
 
 })
 
-.controller('editCtrl' , function() {
+.controller('editCtrl' , function($scope) {
+
+	var app = this;
+	$scope.nameTab = 'active';
+	
+	app.namePhase = function() {
+
+	};
+
+	app.emailPhase = function() {
+
+	};
+
+	app.usernamePhase = function() {
+
+	};
+
+	app.permissionsPhase = function () {
+
+	};
+
+
 
 });
