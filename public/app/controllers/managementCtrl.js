@@ -67,21 +67,37 @@ angular.module('managementController', [])
 
 	var app = this;
 	$scope.nameTab = 'active';
-	
+
 	app.namePhase = function() {
+		$scope.nameTab = 'active';
+		$scope.usernameTab = 'default';
+		$scope.emailTab = 'default';
+		$scope.permissionTab = 'default';
 
 	};
 
 	app.emailPhase = function() {
 
+		$scope.nameTab = 'default';
+		$scope.usernameTab = 'default';
+		$scope.emailTab = 'active';
+		$scope.permissionTab = 'default';
 	};
 
 	app.usernamePhase = function() {
 
+		$scope.nameTab = 'default';
+		$scope.usernameTab = 'active';
+		$scope.emailTab = 'default';
+		$scope.permissionTab = 'default';
 	};
 
 	app.permissionsPhase = function () {
 
+		$scope.nameTab = 'default';
+		$scope.usernameTab = 'default';
+		$scope.emailTab = 'default';
+		$scope.permissionTab = 'active';
 	};
 
 
