@@ -6,6 +6,9 @@ angular.module('managementController', [])
 	app.loading = true;
 	app.accessDenied = true;
 	app.errorMsg = false;
+	app.editAccess = false;
+	app.deleteAccess = false;
+	app.limit = 5;
 
 	User.getUsers().then(function(data) {
 		if (data.data.success) {
