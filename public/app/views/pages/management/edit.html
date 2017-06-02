@@ -14,6 +14,23 @@
 </ul>
 
 <!-- Phase One : Name -->
+<form name="edit.nameForm" ng-show="edit.phase1" ng-submit="edit.updateName(newName, edit.nameForm.name.$valid)" novalidate>
+	<!-- Name Div -->
+	<div ng-class="{'has-success':(edit.nameForm.name.$valid && !edit.nameForm.name.$pristine), 'has-error' : (!edit.nameForm.name.$valid && !edit.nameForm.name.$pristine) || (!edit.nameForm.name.$valid && edit.nameForm.$submitted)}">
+		<!-- Name -->
+		<label>Nombre:</label>
+		<input ng-disabled= "edit.disabled" class= "form-control" type="text" name="name" placeholder="Nombre" ng-model="newName" ng-pattern="/^(([a-zA-Z]{3,20})+[ ]+([a-zA-Z]{3,20})+)+$/" ng-minLength="3" ng-maxLength="20" required>	
+		<p class= "help-block" ng-show="(!edit.nameForm.name.$pristine && edit.nameForm.name.$error.required) || (edit.nameForm.$submitted && edit.nameForm.name.$error.required)">Este campo es requerido</p>
+		<ul ng-show="(!edit.nameForm.name.$pristine && edit.nameForm.name.$error.pattern) || (!edit.nameForm.name.$pristine && edit.nameForm.name.$error.minlength) || (!edit.nameForm.name.$pristine && edit.nameForm.name.$error.maxlength)" class="help-block">
+			<li>Deberia tener un espacio entre nombre y apellido</li>
+			<li>Deberia no conetener ningun caracter especial</li>
+			<li>Deberia no contener ningun numero</li>
+			<li>Deberia tener como menos 3 caracteres pero menos de 20</li>
+		</ul>
+	</div>
+	<br>
+	<button ng-disabled= "edit.disabled" class= "btn btn-primary" type="submit">Actualizar</button>
+</form>
 
 <!-- Phase One: Username -->
 

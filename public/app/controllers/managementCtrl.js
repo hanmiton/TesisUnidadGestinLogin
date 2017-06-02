@@ -67,12 +67,17 @@ angular.module('managementController', [])
 
 	var app = this;
 	$scope.nameTab = 'active';
+	app.phase1 = true;
 
 	app.namePhase = function() {
 		$scope.nameTab = 'active';
 		$scope.usernameTab = 'default';
 		$scope.emailTab = 'default';
 		$scope.permissionTab = 'default';
+		app.phase1 = true;
+		app.phase2 = false;
+		app.phase3 = false;
+		app.phase4 = false;
 
 	};
 
@@ -82,6 +87,10 @@ angular.module('managementController', [])
 		$scope.usernameTab = 'default';
 		$scope.emailTab = 'active';
 		$scope.permissionTab = 'default';
+		app.phase1 = false;
+		app.phase2 = false;
+		app.phase3 = true;
+		app.phase4 = false;
 	};
 
 	app.usernamePhase = function() {
@@ -90,6 +99,10 @@ angular.module('managementController', [])
 		$scope.usernameTab = 'active';
 		$scope.emailTab = 'default';
 		$scope.permissionTab = 'default';
+		app.phase1 = false;
+		app.phase2 = true;
+		app.phase3 = false;
+		app.phase4 = false;
 	};
 
 	app.permissionsPhase = function () {
@@ -98,8 +111,23 @@ angular.module('managementController', [])
 		$scope.usernameTab = 'default';
 		$scope.emailTab = 'default';
 		$scope.permissionTab = 'active';
+		app.phase1 = false;
+		app.phase2 = false;
+		app.phase3 = false;
+		app.phase4 = true;
 	};
 
+	app.updateName = function(newName, valid) {
+		app.errorMsg = false;
+		app.disabled = true;
+
+		if(valid) {
+
+		} else {
+			app.errorMsg = 'Porfavor asegurese de llenar lo campos apropiadamente';
+			app.disabled = false;
+		}
+	}
 
 
 });
