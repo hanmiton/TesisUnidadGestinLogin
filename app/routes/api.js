@@ -488,7 +488,7 @@ module.exports = function(router){
 				res.json({ success: false, message : 'Usuario no encontrado'});
 			} else {
 				if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
-					User.findOne({ _id : editUser }, function (err, user) {
+					User.findById({ _id : editUser }, function (err, user) {
 						console.log(editUser);
 						console.log(user);
 						if (err) throw err;
