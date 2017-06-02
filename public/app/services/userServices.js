@@ -65,7 +65,7 @@ angular.module('userServices', [])
 			return $http.get('/api/edit/' + id);
 		}
 		userFactory.deleteUser = function(username) {
-			return $http.delete('/api/management' + username);
+			return $http.delete('/api/management/' + username);
 		}
 
 		return userFactory;
