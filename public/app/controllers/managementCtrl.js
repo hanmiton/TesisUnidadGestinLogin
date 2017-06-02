@@ -70,6 +70,7 @@ angular.module('managementController', [])
 	app.phase1 = true;
 
 	User.getUser($routeParams.id).then(function(data) {
+		console.log(data.data.user);
 		if(data.data.success) {
 			$scope.newName = data.data.user.name;
 		} else {

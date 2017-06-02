@@ -488,7 +488,7 @@ module.exports = function(router){
 				res.json({ success: false, message : 'Usuario no encontrado'});
 			} else {
 				if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
-					User.findOne( {_id : editUser }, function (err, user) {
+					User.findOne( { _id : editUser }, function (err, user) {
 						if (err) throw err;
 						if (!user) {
 							res.json({ success: false, message: 'Usuario no encontrado'});
@@ -503,6 +503,6 @@ module.exports = function(router){
 			}
 		});
 	});
-	
+
 	return router;
 }
