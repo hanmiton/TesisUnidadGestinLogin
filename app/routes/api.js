@@ -480,5 +480,29 @@ module.exports = function(router){
 		});
 	});
 
+	router.get('/edit/:id', function(req, res) {
+		var editUser = req.params.id;
+		User.findOne( { username: req.decoded.username }, function (err, mainUser){
+			if (err) throw err;
+			if (!mainUser) {
+				res.json({ success: false, message : 'Usuario no encontrado'});
+			} else {
+				if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
+					User.findOne( {_id : editUser }, function (err, user) {
+						if (err) throw err;
+						if (!user) {
+							res.json({ success: false, message: 'Usuario no encontrado'});
+						} else {
+
+							res.json({ success: true, user : user })
+						}
+					});
+				} else {
+					res.json({ success: false, message : 'Permisos Insuficientes'});
+				}
+			}
+		});
+	});
+	
 	return router;
 }

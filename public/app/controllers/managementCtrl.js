@@ -63,11 +63,19 @@ angular.module('managementController', [])
 
 })
 
-.controller('editCtrl' , function($scope) {
+.controller('editCtrl' , function($scope, $routeParams, User) {
 
 	var app = this;
 	$scope.nameTab = 'active';
 	app.phase1 = true;
+
+	User.getUser($routeParams.id).then(function(data) {
+		if(data.data.success) {
+			$scope.newName = data.data.user.name;
+		} else {
+			app.errorMsg = data.data.message;
+		}
+	});
 
 	app.namePhase = function() {
 		$scope.nameTab = 'active';
@@ -120,6 +128,8 @@ angular.module('managementController', [])
 	app.updateName = function(newName, valid) {
 		app.errorMsg = false;
 		app.disabled = true;
+
+		
 
 		if(valid) {
 
