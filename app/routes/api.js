@@ -482,7 +482,7 @@ module.exports = function(router){
 
 	router.get('/edit/:id', function(req, res) {
 		var editUser = req.params.id;
-		editUser.replace(" " , "");
+		editUser = editUser.replace(" " , "");
 		User.findOne( { username: req.decoded.username }, function (err, mainUser){
 			if (err) throw err;
 			if (!mainUser) {
