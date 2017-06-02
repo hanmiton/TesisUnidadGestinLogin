@@ -481,7 +481,6 @@ module.exports = function(router){
 	});
 
 	router.get('/edit/:id', function(req, res) {
-		console.log(req.decoded);
 		var editUser = req.params.id;
 		User.findOne( { username: req.decoded.username }, function (err, mainUser){
 			if (err) throw err;
@@ -489,9 +488,11 @@ module.exports = function(router){
 				res.json({ success: false, message : 'Usuario no encontrado'});
 			} else {
 				if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
-					User.findOne( { _id : editUser }, function (err, user) {
+					User.findOne({ _id : editUser }, function (err, user) {
 						console.log(editUser);
+						console.log(user);
 						if (err) throw err;
+						console.log(editUser);
 						if (!user) {
 							res.json({ success: false, message: 'Usuario no encontrado'});
 						} else {
