@@ -482,13 +482,14 @@ module.exports = function(router){
 
 	router.get('/edit/:id', function(req, res) {
 		var editUser = req.params.id;
+		editUser.replace(" " , "");
 		User.findOne( { username: req.decoded.username }, function (err, mainUser){
 			if (err) throw err;
 			if (!mainUser) {
 				res.json({ success: false, message : 'Usuario no encontrado'});
 			} else {
 				if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
-					User.findOne({ _id : '591dafa8e7d3604db602c7d2' }, function (err, user) {
+					User.findOne({ _id : editUser}, function (err, user) {
 						console.log(editUser);
 						console.log(user);
 						if (err) throw err;
