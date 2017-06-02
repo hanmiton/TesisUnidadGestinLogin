@@ -490,7 +490,7 @@ module.exports = function(router){
 			} else {
 				if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
 					User.findOne( { _id : editUser }, function (err, user) {
-						console.log('entrando a buscar por id');
+						console.log(editUser);
 						if (err) throw err;
 						if (!user) {
 							res.json({ success: false, message: 'Usuario no encontrado'});
