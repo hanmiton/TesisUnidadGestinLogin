@@ -34,7 +34,7 @@
 
 <!-- Phase two: Username -->
 
-<form name="edit.usernameForm" ng-show="edit.phase2" ng-submit="edit.updateUsername(newUsername, edit.usernameForm.usernameForm.$valid)" novalidate>
+<form name="edit.usernameForm" ng-show="edit.phase2" ng-submit="edit.updateUsername(newUsername, edit.usernameForm.username.$valid)" novalidate>
 	<div ng-class="{'has-success':(edit.usernameForm.username.$valid && !edit.usernameForm.username.$pristine), 'has-error' : (!edit.usernameForm.username.$valid && !edit.usernameForm.username.$pristine) || (!edit.usernameForm.username.$valid && edit.usernameForm.$submitted)">
 		<!-- username -->
 		<label>Username:</label>
