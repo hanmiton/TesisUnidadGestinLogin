@@ -34,22 +34,6 @@
 
 <!-- Phase two: Username -->
 
-<form name="edit.usernameForm" ng-show="edit.phase2" ng-submit="edit.updateUsername(newUsername, edit.usernameForm.username.$valid)" novalidate>
-	<div ng-class="{'has-success':(edit.usernameForm.username.$valid && !edit.usernameForm.username.$pristine), 'has-error' : (!edit.usernameForm.username.$valid && !edit.usernameForm.username.$pristine) || (!edit.usernameForm.username.$valid && edit.usernameForm.$submitted)">
-		<!-- username -->
-		<label>Username:</label>
-		<input ng-disabled= "register.disabled" class= "form-control" type="text" name="username" placeholder="username" ng-model="newUsername"  ng-pattern="/^(?!.*?[\W])(?=.*?[a-zA-Z]|=.*?[A-Z]).{3,16}$/" ng-minLength="3" ng-maxLength="25"  required>	
-		<p class= "help-block" ng-show="(!edit.usernameForm.username.$pristine && edit.usernameForm.username.$error.required) || (edit.usernameForm.$submitted && edit.usernameForm.username.$error.required)">Este campo es requerido</p>
-		<p class= "help-block" ng-show="register.usernameMsg && !edit.usernameForm.username.$error.required && edit.usernameForm.username.$valid">{{register.usernameMsg}}</p>
-		<span ng-show="register.checkingUsername" class="glyphicon-repeat"></span>
-		<ul ng-show="(!edit.usernameForm.username.$pristine && edit.usernameForm.username.$error.pattern) || (!edit.usernameForm.username.$pristine && edit.usernameForm.username.$error.minlength) || (!edit.usernameForm.username.$pristine && edit.usernameForm.username.$error.maxlength)" class="help-block">
-			<li>No debe contener ningun caracter especial</li>
-			<li>Debe tener entre 3 a 25 caracteres</li>
-		</ul>
-	</div>
-	<br>
-	<button ng-disabled= "edit.disabled" class= "btn btn-primary" type="submit">Actualizar</button>
-</form>
 
 
 <!-- Phase three: E-mail -->
