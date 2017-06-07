@@ -72,6 +72,7 @@ angular.module('managementController', [])
 	User.getUser($routeParams.id).then(function(data) {
 		if(data.data.success) {
 			$scope.newName = data.data.user.name;
+			$scope.newEmail = data.data.user.email;
 			app.currentUser  = data.data.user._id;
 		} else {
 			app.errorMsg = data.data.message;
@@ -149,6 +150,34 @@ angular.module('managementController', [])
 					app.disabled = false;
 				}
 			});
+		} else {
+			app.errorMsg = 'Porfavor asegurese de llenar lo campos apropiadamente';
+			app.disabled = false;
+		}
+	};
+
+	app.updateEmail = function(newEmail, valid) {
+		app.errorMsg = false;
+		app.disabled = true;
+		var userObject = {};
+
+		if(valid) {
+			userObject._id = app.currentUser;
+			userObject.email = $scope.newEmail;
+			User.editUser(userObject).then(function(data) {
+				if(data.data.success) {
+					app.successMsg = data.data.message;
+					$timeout(function() {
+						app.emailForm.email.$setPristine();
+						app.emailForm.email.$setUntouched();
+						app.successMsg = false;
+						app.disabled = false;
+					}, 2000); 
+				} else {
+					app.errorMsg = data.data.message;
+					app.disabled = false;
+				}
+			});  
 		} else {
 			app.errorMsg = 'Porfavor asegurese de llenar lo campos apropiadamente';
 			app.disabled = false;
