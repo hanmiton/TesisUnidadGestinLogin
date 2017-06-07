@@ -481,7 +481,7 @@ module.exports = function(router){
 	});
 
 	router.get('/edit/:id', function(req, res) {
-		var editUser = req.params.id;
+		var editUser = req.params._id;
 		editUser = editUser.replace(" " , "");
 		User.findOne( { username: req.decoded.username }, function (err, mainUser){
 			if (err) throw err;
@@ -503,6 +503,162 @@ module.exports = function(router){
 					});
 				} else {
 					res.json({ success: false, message : 'Permisos Insuficientes'});
+				}
+			}
+		});
+	});
+
+	router.put('/edit', function(req, res) {
+		var editUser = req.body._id;
+		if (req.body.name) var newName = req.body.name;
+		if (req.body.username) var newUsername = req.body.username;
+		if (req.body.email) var newEmail = req.body.email;
+		if (req.body.permission) var newPermission = req.body.permission;
+		User.findOne( {username: req.decoded.username }, function( err, mainUser) {
+			if (err) throw err;
+			if (!mainUser) {
+				res.json( { success: false, message: "usuario no encontrado"});
+			} else {
+				if (newName) {
+					if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
+						User.findOne({ _id: editUser}, function (err, user) {
+							if (err) throw err;
+							if (!user) {
+								res.json({ success : false , message: 'Usuario no encontrado'});
+							} else {
+								user.name = newName;
+								user.save( function (err) {
+									if (err) {
+										console.log(err);
+									} else {
+										res.json( { success: true, message: 'Nombre ha sido actualizado'});
+									}
+								});
+							}
+						});
+					} else {
+						res.json({success: false, message: 'Permisos insufiecientes'});
+					}
+				}
+				if (newUsername) {
+					if (mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
+						User.findOne({ _id : editUser}, function( err, user ) {
+							if (err) throw err;
+							if (!user) {
+								res.json({ success: false, message : 'Usurio no encontrado'});
+							} else {
+								user.username = newUsername;
+								user.save(function(err) {
+									if (err) {
+										console.log(err);
+									} else {
+										res.json( { success: true, message: 'Nombre de Usuario ha sido actualizado'});
+									}
+								});
+							}
+						});
+					} else {
+						res.json( { success: false, message: 'Permisos Insuficientes'});
+					}
+				}
+				if (newEmail) {
+					if (mainUser.permission === 'admin' || mainUser.permission === 'moderator' ) {
+						User.findOne({ _id : editUser}, function( err, user ) {
+							if (err) throw err;
+							if (!user) {
+								res.json({ success: false, message : 'Usurio no encontrado'});
+							} else {
+								user.email = newEmail;
+								user.save(function(err) {
+									if (err) {
+										console.log(err);
+									} else {
+										res.json( { success: true, message: 'Correo ha sido actualizado'});
+									}
+								});
+							}
+						});
+					} else {
+						res.json({ success : false, message : 'Permisos Insuficientes'})
+					}
+				}
+				if (newPermission) {
+					if(mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
+						User.findOne({ _id : editUser}, function( err, user ) {
+							if (err) throw err;
+							if (!user) {
+								res.json({ success: false, message : 'Usurio no encontrado'});
+							} else {
+								if (newPermission === 'user') {
+									if(user.permission === 'admin') {
+										if(mainUser.permission !== 'admin') {
+											res.json({success: false, message: 'Permisos Insuficientes. Usted debe ser un administrador para degradar otro administrador'});
+										} else {
+											user.permission = newPermission;
+											user.save(function(err) {
+												if (err) {
+													console.log(err);
+												} else {
+													res.json({success: true, message: 'Permisos han sido actualizados'});
+												}
+											});
+										}
+									} else {
+										user.permission = newPermission;
+										user.save(function(err) {
+											if (err) {
+												console.log(err);
+											} else {
+												res.json({success : true, message: 'Permisos han sido actualizados'})
+											}
+										});
+									}
+								}
+								if (newPermission === 'moderator') {
+									if (user.permission === 'admin') {
+										if(mainUser.permission !== 'admin') {
+											res.json({ success: false, message: 'Permisos Insuficientes. Usted debe ser un administrador para degradar otro administrador'});
+										} else {
+											user.permission = newPermission;
+											user.save(function(err) {
+												if (err) {
+													console.log(err);
+												} else {
+													res.json({success : true, message: 'Permisos han sido actualizados'})
+												}
+											});
+										}
+									} else {
+										user.permission = newPermission;
+										user.save(function(err) {
+											if (err) {
+												console.log(err);
+											} else {
+												res.json({success : true, message: 'Permisos han sido actualizados'});
+											}
+										});
+									}
+								}
+								if (newPermission === 'admin') {
+									if (mainUser.permission === 'admin' ) {
+										user.permission = newPermission;
+										user.save(function(err) {
+											if (err) {
+												console.log(err);
+											} else {
+												res.json({success : true, message: 'Permisos han sido actualizados'});
+											}
+										});
+									} else {
+										res.json({success: false, message: 'Permisos Insuficientes. Debe ser un administrador para actualizar a alguien al nivel de administrador '});
+									}
+								}
+
+							}
+						});
+					} else {
+						res.json({success: false, message: 'Permisos Insuficientes'});
+					}
 				}
 			}
 		});

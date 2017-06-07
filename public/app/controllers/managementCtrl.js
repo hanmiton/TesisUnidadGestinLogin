@@ -63,16 +63,16 @@ angular.module('managementController', [])
 
 })
 
-.controller('editCtrl' , function($scope, $routeParams, User) {
+.controller('editCtrl' , function($scope, $routeParams, User , $timeout) {
 
 	var app = this;
 	$scope.nameTab = 'active';
 	app.phase1 = true;
 
 	User.getUser($routeParams.id).then(function(data) {
-		console.log(data.data.user);
 		if(data.data.success) {
 			$scope.newName = data.data.user.name;
+			app.currentUser  = data.data.user._id;
 		} else {
 			app.errorMsg = data.data.message;
 		}
@@ -125,20 +125,35 @@ angular.module('managementController', [])
 		app.phase3 = false;
 		app.phase4 = true;
 	};
+	
 
 	app.updateName = function(newName, valid) {
 		app.errorMsg = false;
 		app.disabled = true;
-
-		
+		var userObject = {};
 
 		if(valid) {
-
+			userObject._id = app.currentUser;
+			userObject.name = $scope.newName;
+			User.editUser(userObject).then(function(data) {
+				if(data.data.success) {
+					app.successMsg = data.data.message;
+					$timeout(function() {
+						app.nameForm.name.$setPristine();
+						app.nameForm.name.$setUntouched();
+						app.successMsg = false;
+						app.disabled = false;
+					}, 2000); 
+				} else {
+					app.errorMsg = data.data.message;
+					app.disabled = false;
+				}
+			});
 		} else {
 			app.errorMsg = 'Porfavor asegurese de llenar lo campos apropiadamente';
 			app.disabled = false;
 		}
-	}
+	};
 
 
 });
