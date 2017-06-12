@@ -226,33 +226,43 @@ angular.module('managementController', [])
 		}
 	};
 
-	app.updatePermissions = function(newPermission, valid) {
+	app.updatePermissions = function(newPermission) {
 		app.errorMsg = false;
 		app.disabled = true;
 		var userObject = {};
 
-		if(valid) {
-			userObject._id = app.currentUser;
-			userObject.permission = $scope.newPermission;
-			User.editUser(userObject).then(function(data) {
-				if(data.data.success) {
-					app.successMsg = data.data.message;
-					$timeout(function() {
-						app.usernameForm.username.$setPristine();
-						app.usernameForm.username.$setUntouched();
-						app.successMsg = false;
-						app.disabled = false;
-					}, 2000); 
-				} else {
-					app.errorMsg = data.data.message;
-					app.disabled = false;
-				}
-			});  
-		} else {
-			app.errorMsg = 'Porfavor asegurese de llenar lo campos apropiadamente';
-			app.disabled = false;
-		}
-	};
+		userObject._id = app.currentUser;
+		userObject.permission = newPermission;
+		User.editUser(userObject).then(function(data) {
+			if(data.data.success) {
+				app.successMsg = data.data.message;
+				$timeout(function() {
+					app.successMsg = false;
 
+					if(newPermission === 'user') {
+						$scope.newPermission = 'user';
+						app.disableUser = true;
+						app.disableModerator = false;
+						app.disableAdmin = false;
+					} else if (newPermission === 'moderator' ) {
+						$scope.newPermission = 'moderator';
+						app.disableModerator = true;
+						app.disableUser = false;
+						app.disableAdmin = false;
+					} else if (newPermission === 'admin') {
+						$scope.newPermission = 'admin';
+						app.disableAdmin = true;
+						app.disableModerator = false;
+						app.disableUser = false; 
+					}
+		
+				}, 2000); 
+			} else {
+				app.errorMsg = data.data.message;
+				app.disabled = false;
+			}
+		});  
+		
+	};
 
 });
