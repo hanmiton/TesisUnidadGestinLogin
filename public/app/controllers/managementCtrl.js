@@ -136,7 +136,7 @@ angular.module('managementController', [])
 		} else if ($scope.newPermission === 'moderator') {
 			app.disableModerator = true;
 		} else if ($scope.newPermission === 'admin') {
-			app.disabledAdmin = true;
+			app.disableAdmin = true;
 		}
 
 	};
