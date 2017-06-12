@@ -127,6 +127,18 @@ angular.module('managementController', [])
 		app.phase2 = false;
 		app.phase3 = false;
 		app.phase4 = true;
+		app.disableUser = false;
+		app.disableModerator = false;
+		app.disableAdmin = false;
+
+		if ($scope.newPermission === 'user') {
+			app.disableUser = true;
+		} else if ($scope.newPermission === 'moderator') {
+			app.disableModerator = true;
+		} else if ($scope.newPermission === 'admin') {
+			app.disabledAdmin = true;
+		}
+
 	};
 	
 
