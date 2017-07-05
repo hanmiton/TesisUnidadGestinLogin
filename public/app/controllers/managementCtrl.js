@@ -227,6 +227,7 @@ angular.module('managementController', [])
 	};
 
 	app.updatePermissions = function(newPermission) {
+		console.log("estoy en controlador")
 		app.errorMsg = false;
 		app.disabled = true;
 		var userObject = {};
