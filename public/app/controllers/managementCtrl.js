@@ -117,7 +117,7 @@ angular.module('managementController', [])
 		app.phase4 = false;
 	};
 
-	app.permissionsPhase = function () {
+	app.Phase = function () {
 
 		$scope.nameTab = 'default';
 		$scope.usernameTab = 'default';
