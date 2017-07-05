@@ -229,7 +229,11 @@ angular.module('managementController', [])
 	app.updatePermissions = function(newPermission) {
 		console.log("estoy en controlador")
 		app.errorMsg = false;
-		app.disabled = true;
+
+		app.disableUser = true;
+		app.disableModerator = true;
+		app.disableAdmin = true;
+
 		var userObject = {};
 
 		userObject._id = app.currentUser;
