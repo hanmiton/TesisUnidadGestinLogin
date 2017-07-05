@@ -585,6 +585,7 @@ module.exports = function(router){
 				if (newPermission) {
 					if(mainUser.permission === 'admin' || mainUser.permission === 'moderator') {
 						User.findOne({ _id : editUser}, function( err, user ) {
+							console.log("estoy camiendo permisos")
 							if (err) throw err;
 							if (!user) {
 								res.json({ success: false, message : 'Usurio no encontrado'});
