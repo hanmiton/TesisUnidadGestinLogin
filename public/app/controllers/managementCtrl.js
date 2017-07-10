@@ -90,6 +90,7 @@ angular.module('managementController', [])
 		app.phase2 = false;
 		app.phase3 = false;
 		app.phase4 = false;
+		app.errorMsg = false;	
 
 	};
 
@@ -103,6 +104,8 @@ angular.module('managementController', [])
 		app.phase2 = false;
 		app.phase3 = true;
 		app.phase4 = false;
+		app.errorMsg = false;	
+
 	};
 
 	app.usernamePhase = function() {
@@ -115,6 +118,7 @@ angular.module('managementController', [])
 		app.phase2 = true;
 		app.phase3 = false;
 		app.phase4 = false;
+		app.errorMsg = false;	
 	};
 
 	app.permissionsPhase = function () {
@@ -130,6 +134,8 @@ angular.module('managementController', [])
 		app.disableUser = false;
 		app.disableModerator = false;
 		app.disableAdmin = false;
+		app.errorMsg = false;	
+
 
 		if ($scope.newPermission === 'user') {
 			app.disableUser = true;
