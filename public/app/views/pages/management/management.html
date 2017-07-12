@@ -47,7 +47,7 @@
 </div>
 
 <div ng-show = "searchFilter !== undefined">
-	<p><strong>Mostrando: </strong> {(management.users | filter: searchFilter | limitTo: management.limit).length}}</p>
+	<p><strong>Mostrando: </strong> {{(management.users | filter: searchFilter | limitTo: management.limit).length}}</p>
 </div>
 <!--custom error message -->
 <div class="show-hide-message row" ng-show="management.showMoreError">
