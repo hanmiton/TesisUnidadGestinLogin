@@ -39,6 +39,16 @@
 	</a>
 </div>
 
+
+<br>
+
+<div ng-show= "searchFilter !== undefined">
+	<p><strong>Total Resultados: </strong> {{(management.users | filter: searchFilter ).length}}</p>
+</div>
+
+<div ng-show = "searchFilter !== undefined">
+	<p><strong>Mostrando: </strong> {(management.users | filter: searchFilter | limitTo: management.limit).length}}</p>
+</div>
 <!--custom error message -->
 <div class="show-hide-message row" ng-show="management.showMoreError">
 	<div class="alert-danger alert"> {{management.showMoreError}}
