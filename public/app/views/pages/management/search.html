@@ -1,1 +1,96 @@
-<h1>Hola desde ruta de busqueda</h1>
+<div class="page-header">
+	<h1>Buscador</h1>
+</div>
+
+<br>
+
+
+<!-- INput for filter-->
+
+<div class="navbar-form">
+	<div class="form-group">
+		<input type="text" name="form-control" name="searchByUsername" placeholder="buscar por..." ng-model= "searchByUsername">
+	</div>
+	<button type="button" class= "btn btn-default"> Nombre de Usuario</button>
+</div>
+
+
+
+<div class="navbar-form">
+	<div class="form-group">
+		<input type="text" name="form-control" name="searchByEmail" placeholder="buscar por..." ng-model= "searchByEmail">
+	</div>
+	<button type="button" class= "btn btn-default">E-mail</button>
+</div>
+
+
+<div class="navbar-form">
+	<div class="form-group">
+		<input type="text" name="form-control" name="searchByName" placeholder="buscar por..." ng-model= "searchByName">
+	</div>
+	<button type="button" class= "btn btn-default"> Nombre</button>
+</div>
+
+
+
+<br>
+
+<div ng-show= "searchFilter !== undefined">
+	<p><strong>Total Resultados: </strong> {{(management.users | filter: searchFilter ).length}}</p>
+</div>
+
+<div ng-show = "searchFilter !== undefined">
+	<p><strong>Mostrando: </strong> {{(management.users | filter: searchFilter | limitTo: management.limit).length}}</p>
+</div>
+<!--custom error message -->
+<div class="show-hide-message row" ng-show="management.showMoreError">
+	<div class="alert-danger alert"> {{management.showMoreError}}
+</div>
+</div> 
+<br>
+<br>
+
+
+
+<div class="panel-primary panel">
+	<div class="panel-heading">
+		<strong> Administración de Usuarios</strong>
+	</div>
+	<table class="table">
+		<tr>
+			<th>Name</th>
+			<th>Nombre Usuario</th>
+			<th>Correo</th>
+		</tr>
+		<tr ng-repeat = "person in management.users | filter: searchFilter | limitTo: management.searchLimit">
+			<td> {{ person.name }}</td>
+			<td> {{ person.username }}</td>
+			<td> {{ person.email }}</td>
+			<td>
+				<a href="/edit/ {{person._id}}">
+					<button type="button" ng-show="management.editAccess" class="btn-primary btn">Editar</button>
+				</a>
+					<button type= "button" ng-click= "management.deleteUser();" ng-show="management.deleteAccess" class="btn-danger btn">Eliminar</button>			
+			</td>
+		</tr>
+	</table>
+</div>
+
+<br>
+<br>
+
+<button type="button" ng-click="management.showMore(number);" class= "btn btn-success">Aplicar Filtro</button>
+<button type="button" ng-click="management.showAll();" class= "btn btn-warning">Mostrar Todo</button>
+<div class="showmore">
+	<div class="col-lg-6">
+		<div class="input-group">
+			<span class="input-group-addon"> Despliegue Resultado:</span>
+			<input type="text" name="form-control" ng-model="number">
+		</div>
+	</div>
+</div>
+
+<br>
+<br>
+
+

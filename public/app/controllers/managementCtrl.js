@@ -9,7 +9,8 @@ angular.module('managementController', [])
 	app.editAccess = false;
 	app.deleteAccess = false;
 	app.limit = 5;
-
+	app.searchLimit = 0;
+	
 	function getUsers() {
 		User.getUsers().then(function(data) {
 			if (data.data.success) {
