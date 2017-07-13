@@ -31,6 +31,26 @@
 	<button type="button" class= "btn btn-default"> Nombre</button>
 </div>
 
+<div class="navbar-form">
+	<button class="btn btn-default" type="button" ng-click="management.advancedSearch(searchByUsername, searchByEmail, searchByName);"> Busqueda</button>
+	<br>
+	<br>
+	<div class="btn-group">
+		<button type="button" class="btn btn-danger">Ordenar por</button>
+		<button type="button" class="btn btn-danger dropdown-toggle" data-toggle= "dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="caret"></span>
+			<span class="sr-only">Toggle Dropdown</span>
+		</button>
+		<ul class="dropdown-menu">
+			<li><a ng-click="management.sortOrder('username');" href="#"></a>Nombre de Usuario</li>
+
+			<li><a ng-click="management.sortOrder('E-mail');" href="#"></a>Correo</li>
+
+			<li><a ng-click="management.sortOrder('name');" href="#"></a>Nombre</li>
+
+		</ul>
+	</div>
+</div>
 
 
 <br>
@@ -79,6 +99,7 @@
 <br>
 <br>
 
+<!-- Custom Errror Message -->
 <div class="row show-hide-message" ng-show="management.showMoreError">
 	<div class="alert alert-danger">{{ management.showMoreError}}</div>
 </div>
