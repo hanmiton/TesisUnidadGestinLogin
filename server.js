@@ -30,6 +30,10 @@ mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
 	}
 });
 
+app.get('/test', function(req,res) {
+	res.send('hello world');
+});
+
 app.get('*',function(req, res){
 	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
