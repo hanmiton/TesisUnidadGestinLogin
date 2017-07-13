@@ -3,12 +3,13 @@ angular.module('mainController',['authServices', 'userServices'])
 .controller('mainCtrl', function($scope, $http, Auth, $location, $timeout, $rootScope, $window, $interval, $route, User, AuthToken){
 	//console.log('hanmilton')
 	var app = this;
+ 	/* ejemplo get
  	$scope.test = "holamunod";
  	
  	$http.get('/test').then(function(data){
  		console.log(data);
  	});
-
+	*/
  	app.checkSession = function() {
  		if(Auth.isLoggedIn()) {
  			app.checkingSession = true;

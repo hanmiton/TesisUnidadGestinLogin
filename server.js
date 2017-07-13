@@ -31,7 +31,7 @@ mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
 		console.log('Successfully connected to MongoDB');
 	}
 });
-
+ /* ejemplo get
 app.get('/test', function(req,res) {
 	User.findOne({ username: 'hanmilton'} , function(err, user) {
 		if (err) {
@@ -45,7 +45,7 @@ app.get('/test', function(req,res) {
 		}
 	});
 });
-
+*/
 app.get('*',function(req, res){
 	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
