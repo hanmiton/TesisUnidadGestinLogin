@@ -55,18 +55,15 @@
 
 <br>
 
-<div ng-show= "searchFilter !== undefined">
-	<p><strong>Total Resultados: </strong> {{(management.users | filter: searchFilter ).length}}</p>
+<div ng-show= "management.searchLimit === undefined">
+	<p><strong>Resultados: </strong> {{(management.users | filter: advancedSearchFilter | limitTo: management.searchLimit).length}}</p>
 </div>
 
-<div ng-show = "searchFilter !== undefined">
-	<p><strong>Mostrando: </strong> {{(management.users | filter: searchFilter | limitTo: management.limit).length}}</p>
+<div ng-show = "management.sort">
+	<p><strong>Ordenado por: </strong> {{ management.sort }}</p>
 </div>
 <!--custom error message -->
-<div class="show-hide-message row" ng-show="management.showMoreError">
-	<div class="alert-danger alert"> {{management.showMoreError}}
-</div>
-</div> 
+
 <br>
 <br>
 
@@ -82,7 +79,7 @@
 			<th>Nombre Usuario</th>
 			<th>Correo</th>
 		</tr>
-		<tr ng-repeat = "person in management.users | filter: searchFilter | limitTo: management.searchLimit">
+		<tr ng-repeat = "person in management.users | filter: advancedSearchFilter | limitTo: management.searchLimit | orderBy: management.sort">
 			<td> {{ person.name }}</td>
 			<td> {{ person.username }}</td>
 			<td> {{ person.email }}</td>
@@ -98,11 +95,6 @@
 
 <br>
 <br>
-
-<!-- Custom Errror Message -->
-<div class="row show-hide-message" ng-show="management.showMoreError">
-	<div class="alert alert-danger">{{ management.showMoreError}}</div>
-</div>
 
 <br>
 <br>

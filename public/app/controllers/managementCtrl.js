@@ -10,7 +10,7 @@ angular.module('managementController', [])
 	app.deleteAccess = false;
 	app.limit = 5;
 	app.searchLimit = 0;
-	
+
 	function getUsers() {
 		User.getUsers().then(function(data) {
 			if (data.data.success) {
@@ -88,6 +88,26 @@ angular.module('managementController', [])
 		app.showMoreError = false;
 	};
 
+	app.advancedSearch= function(searchByUsername, searchByEmail, searchByName) {
+		if(searchByUsername || searchByEmail || searchByName) {
+			$scope.advancedSearchFilter = {};
+
+			if (searchByUsername) {
+				$scope.advancedSearchFilter.username = searchByUsername;
+			}
+			if (searchByEmail) {
+				$scope.advancedSearchFilter.email = searchByEmail;
+			}
+			if (searchByName) {
+				$scope.advancedSearchFilter.name = searchByName;
+			}
+			app.searchLimit = undefined;
+		}
+	};
+
+	app.sortOrder = function (order) {
+		app.sort = order; 
+	};
 })
 
 .controller('editCtrl' , function($scope, $routeParams, User , $timeout) {
