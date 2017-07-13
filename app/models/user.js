@@ -64,8 +64,8 @@ var UserSchema = new Schema({
 	active: { type: Boolean, required: true, default: false},
 	temporarytoken: { type: String, required: true},
 	resettoken: {type: String, required: false},
-	permission: {type: String, required: true, default: 'user' }
-
+	permission: {type: String, required: true, default: 'user' },
+	profilePic: {type: String, required: false, default: null }
 });
 
 UserSchema.pre('save', function(next){
