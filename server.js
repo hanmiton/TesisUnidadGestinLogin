@@ -32,15 +32,15 @@ mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
 	}
 });
 
-app.get('/test', function(req,res) {
-	User.find({} , function(err, users) {
+app.get('/test/:username', function(req,res) {
+	User.findOne({ username: req.params.username} , function(err, user) {
 		if (err) {
 			res.send(err);
 		} else {
-			if (!users) {
+			if (!user) {
 				res.send(' Hey este usuario no existe');
 			} else {
-				res.send(users);
+				res.send(user);
 			}
 		}
 	});
