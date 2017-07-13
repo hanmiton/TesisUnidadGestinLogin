@@ -33,14 +33,14 @@ mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
 });
 
 app.get('/test', function(req,res) {
-	User.findOne({ username: 'hanmilton'} , function(err, user) {
+	User.find({} , function(err, users) {
 		if (err) {
 			res.send(err);
 		} else {
-			if (!user) {
+			if (!users) {
 				res.send(' Hey este usuario no existe');
 			} else {
-				res.send(user);
+				res.send(users);
 			}
 		}
 	});
