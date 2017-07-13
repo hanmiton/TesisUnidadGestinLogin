@@ -32,8 +32,8 @@ mongoose.connect('mongodb://localhost:27017/tutorial', function(err){
 	}
 });
 
-app.get('/test/:username', function(req,res) {
-	User.findOne({ username: req.params.username} , function(err, user) {
+app.get('/test', function(req,res) {
+	User.findOne({ username: 'hanmilton'} , function(err, user) {
 		if (err) {
 			res.send(err);
 		} else {

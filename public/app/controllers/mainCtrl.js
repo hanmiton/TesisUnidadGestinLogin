@@ -1,9 +1,9 @@
 angular.module('mainController',['authServices', 'userServices'])
 
-.controller('mainCtrl', function(Auth, $location, $timeout, $rootScope, $window, $interval, $route, User, AuthToken){
+.controller('mainCtrl', function($scope, Auth, $location, $timeout, $rootScope, $window, $interval, $route, User, AuthToken){
 	//console.log('hanmilton')
 	var app = this;
- 	
+ 	$scope.test = "holamunod";
  	app.loadme = false;
 
  	app.checkSession = function() {
