@@ -82,7 +82,7 @@
 
       <div class="well">
         <div class="progress">
-          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
             <span class = "sr-only"></span>
           </div>
         </div>
@@ -96,6 +96,18 @@
           <br>
           <button class="btn btn-primary" ng-disabled="uploading">Subir</button>
         </form>
+
+        <br>
+
+        <img src="mythumbnail" ng-src="{{ thumbnail.dataUrl || 'https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg'}}">
+
+        <br>
+        <br>
+
+        <div ng-show="message">
+          <div ng-class="alert">{{ message}}</div>
+        </div>
+
       </div>
       <div ng-view></div>
 
