@@ -176,3 +176,8 @@ header .navbar {
 	to { transform:  rotate(360deg); }
 }
 
+.mythumbnail {
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+}
