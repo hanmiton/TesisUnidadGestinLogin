@@ -1,4 +1,4 @@
-angular.module('mainController',['authServices', 'userServices'])
+angular.module('mainController',['fileModelDirective','authServices', 'userServices'])
 
 .controller('mainCtrl', function($scope, $http, Auth, $location, $timeout, $rootScope, $window, $interval, $route, User, AuthToken){
 	//console.log('hanmilton')
