@@ -1,6 +1,6 @@
-angular.module('mainController',['fileModelDirective','authServices', 'userServices'])
+angular.module('mainController',['fileModelDirective','uploadFileService','authServices', 'userServices'])
 
-.controller('mainCtrl', function($scope, $http, Auth, $location, $timeout, $rootScope, $window, $interval, $route, User, AuthToken){
+.controller('mainCtrl', function($scope, uploadFile, $http, Auth, $location, $timeout, $rootScope, $window, $interval, $route, User, AuthToken){
 	//console.log('hanmilton')
 	var app = this;
  	/* ejemplo get
