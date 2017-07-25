@@ -90,11 +90,11 @@
           </div>
         </div>
 
-        <form>
+        <form ng-submit="Submit();">
           <label class="btn btn-success">
             Buscador
-          </label>
           <input type="file" file-model="file.upload" name="myfile" ng-disabled="uploading" style="display: none;">
+          </label>
           <br>
           <br>
           <button class="btn btn-primary" ng-disabled="uploading">Subir</button>

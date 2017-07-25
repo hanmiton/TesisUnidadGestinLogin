@@ -10,6 +10,26 @@ angular.module('mainController',['fileModelDirective','uploadFileService','authS
  		console.log(data);
  	});
 	*/
+
+	$scope.file = {};
+
+	$scope.Submit = function () {
+		$scope.uploading = true;
+		uploadFile.upload($scope.file).then(function(data) {
+			if (data.data.success) {
+				$scope.uploading = false; 
+				$scope.alert = 'alert alert-success';
+				$scope.message = data.data.message;
+				$scope.file = {};
+			} else {
+				$scope.uploading = false;
+				$scope.alert = 'alert alert-danger';
+				$scope.message = data.data.message;
+				$scope.file = {};
+			}
+		});
+	};
+
  	app.checkSession = function() {
  		if(Auth.isLoggedIn()) {
  			app.checkingSession = true;

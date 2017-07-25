@@ -10,6 +10,26 @@ var path = require('path');
 var passport = require('passport');
 var social = require('./app/passport/passport')(app, passport);
 var User = require('./app/models/user.js');
+var multer = require('multer');
+var storage = multer.diskStorage({
+	destination: function(req, file, cb) {
+		cb(null, './uploads/images/')
+	}
+	filename: function(req, file, cb) {
+		if(!file.originalname.match(/\.(png)$/)){
+			var err = new Error();
+			err.code = 'filetype';
+			return cb(err);
+		} else {
+			cb(null, Date.now() + '_' + file.originalname);
+		}
+	} 	
+});
+
+var upload = multer({ 
+	storage: storage,
+	limits: {fileSize: 10000000}
+	 }).single('myfile');
 
 
 app.use(morgan('dev')); 
@@ -46,6 +66,28 @@ app.get('/test', function(req,res) {
 	});
 });
 */
+
+app.post('/upload' function(req.res ) {
+	upload(req, res,, function(err) {
+		if (err) {
+			if (err.code === 'LIMIT_FILE_SIZE'){
+				res.json({ success : false , message : 'El tamaño del archivo es demasiado grande. Límite máximo es 10 mb'})
+			} else if (err.code === 'filetype') {
+				res.json({success: false, message: 'El tipo de archivo no es válido. Debe ser .png'});
+			} else {
+				console.log(err);
+				res.json({success: false, message: 'El archivo no se pudo cargar'});
+			}
+		} else {
+			if (!req.file) {
+				res.json({ success: false, message: 'No se ha seleccionado ningún archivo'});
+			} else {
+				res.json({ success: true, message: 'Se ha cargado el archivo'});
+			}
+		}
+	});
+});
+
 app.get('*',function(req, res){
 	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
