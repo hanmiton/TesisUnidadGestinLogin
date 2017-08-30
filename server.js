@@ -23,6 +23,7 @@ var storage = multer.diskStorage({
 		} else {
 			cb(null, Date.now() + '_' + file.originalname);
 		}
+		//añadientdo comentario 
 	} 	  
 });
 
