@@ -24,6 +24,7 @@ var storage = multer.diskStorage({
 			cb(null, Date.now() + '_' + file.originalname);
 		}
 		//añadientdo comentario 
+		//estoy con alex
 	} 	  
 });
 
